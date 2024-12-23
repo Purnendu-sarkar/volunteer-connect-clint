@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 // Register Component
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signOutUser } = useContext(AuthContext);
   const [error, setError] = useState(""); 
   const navigate = useNavigate();
 
@@ -21,6 +21,20 @@ const Register = () => {
     const email = form.email.value;
     const photoURL = form.photoURL.value;
     const password = form.password.value;
+
+//     // Call the createUser function from AuthContext
+//     createUser(email, password, name, photoURL)
+//     .then((user) => {
+//       console.log("User created successfully:", user);
+//       toast.success("Registration successful!");
+//       form.reset();
+//       navigate("/");
+//     })
+//     .catch((error) => {
+//       console.error("Error during registration:", error);
+//       toast.error(error.message);
+//     });
+// };
 
     // Password validation
     if (!/[A-Z]/.test(password)) {
@@ -43,18 +57,19 @@ const Register = () => {
     setError("");
 
     // Call the createUser function from AuthContext
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        toast.success("Registration successful!");
-        form.reset();
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error.message);
-        toast.error(error.message);
-      });
-  };
+    createUser(email, password, name, photoURL)
+    .then((user) => {
+      console.log("User created successfully:", user);
+      toast.success("Registration successful!");
+      form.reset();
+      signOutUser()
+      navigate("/logIn");
+    })
+    .catch((error) => {
+      console.error("Error during registration:", error);
+      toast.error(error.message);
+    });
+};
 
   return (
     <div className="hero bg-base-200 min-h-screen">

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const SocialLogin = () => {
   const { singInWithGoogle } = useContext(AuthContext);
@@ -10,10 +12,16 @@ const SocialLogin = () => {
     singInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        toast.success(`Welcome, ${result.user.displayName || "User"}!`, {
+          position: "top-right",
+        });
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.message);
+        console.error(error.message);
+        toast.error("Google Sign-In failed. Please try again.", {
+          position: "top-right",
+        }); 
       });
   };
 

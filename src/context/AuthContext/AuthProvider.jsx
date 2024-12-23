@@ -9,14 +9,38 @@ import {
   signOut,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
+import { updateProfile } from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  // const createUser = (email, password) => {
+  //   setLoading(true);
+  //   return createUserWithEmailAndPassword(auth, email, password);
+  // };
+  const createUser = (email, password, displayName, photoURL) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).then((result) => {
+      return updateProfile(result.user, {
+        displayName: displayName || "",
+        photoURL: photoURL || "",
+      })
+        .then(() => {
+          console.log("Profile updated successfully!");
+          // Ensure the updated user is set
+          setUser({
+            ...result.user,
+            displayName,
+            photoURL,
+          });
+          return result.user;
+        })
+        .catch((error) => {
+          console.error("Error updating profile:", error);
+          throw error;
+        });
+    });
   };
 
   const signInUser = (email, password) => {
@@ -38,7 +62,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        // If user exists, set with full profile
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName || "No Name",
+          photoURL: currentUser.photoURL || "",
+        });
+      } else {
+        setUser(null);
+      }
       console.log("state captured", currentUser);
       setLoading(false);
     });
