@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -80,7 +80,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/add-post">Add Volunteer</Link>
+                    <Link to="/volunteer-needs">Add Volunteer</Link>
                   </li>
                   <li>
                     <Link to="/manage-posts">Manage My Posts</Link>
@@ -142,7 +142,7 @@ const Navbar = () => {
             {user ? (
               <>
                 <li>
-                  <Link to="/add-post">Add Volunteer</Link>
+                  <Link to="/volunteer-needs">Add Volunteer</Link>
                 </li>
                 <li>
                   <Link to="/manage-posts">Manage My Posts</Link>

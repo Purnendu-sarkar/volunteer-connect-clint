@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
 import { updateProfile } from "firebase/auth";
+import PropTypes from "prop-types";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -90,8 +91,12 @@ const AuthProvider = ({ children }) => {
     singInWithGoogle
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>{!loading && children}</AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthProvider;

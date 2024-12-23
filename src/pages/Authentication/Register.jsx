@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 // Register Component
 const Register = () => {
   const { createUser, signOutUser } = useContext(AuthContext);
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // Form submission handler
@@ -21,20 +21,6 @@ const Register = () => {
     const email = form.email.value;
     const photoURL = form.photoURL.value;
     const password = form.password.value;
-
-//     // Call the createUser function from AuthContext
-//     createUser(email, password, name, photoURL)
-//     .then((user) => {
-//       console.log("User created successfully:", user);
-//       toast.success("Registration successful!");
-//       form.reset();
-//       navigate("/");
-//     })
-//     .catch((error) => {
-//       console.error("Error during registration:", error);
-//       toast.error(error.message);
-//     });
-// };
 
     // Password validation
     if (!/[A-Z]/.test(password)) {
@@ -58,18 +44,18 @@ const Register = () => {
 
     // Call the createUser function from AuthContext
     createUser(email, password, name, photoURL)
-    .then((user) => {
-      console.log("User created successfully:", user);
-      toast.success("Registration successful!");
-      form.reset();
-      signOutUser()
-      navigate("/logIn");
-    })
-    .catch((error) => {
-      console.error("Error during registration:", error);
-      toast.error(error.message);
-    });
-};
+      .then((user) => {
+        console.log("User created successfully:", user);
+        toast.success("Registration successful!");
+        form.reset();
+        signOutUser();
+        navigate("/logIn");
+      })
+      .catch((error) => {
+        console.error("Error during registration:", error);
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -136,11 +122,12 @@ const Register = () => {
                 className="input input-bordered"
                 required
               />
-              <label className="label">
-                <a href="/login" className="label-text-alt link link-hover">
-                  Already have an account? Login here.
+              <p className="text-center mt-4">
+                Already have an account?{" "}
+                <a href="/login" className="link text-primary">
+                  Login here.
                 </a>
-              </label>
+              </p>
             </div>
 
             {/* Submit Button */}
