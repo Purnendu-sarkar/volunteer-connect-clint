@@ -19,7 +19,7 @@ const VolunteerDetails = () => {
     };
     fetchPost();
   }, [id]);
-//   console.log(post, id);
+  //   console.log(post, id);
 
   if (!post) {
     return <div>Loading...</div>;
@@ -50,7 +50,7 @@ const VolunteerDetails = () => {
             <strong>Deadline:</strong>{" "}
             {new Date(post.deadline).toLocaleDateString()}
           </p>
-          <button className="w-full bg-purple-600 text-white py-3 rounded-md text-lg hover:bg-purple-700 transition">
+          <button className="bg-purple-600 text-white py-2 px-4 rounded-md">
             Be a Volunteer
           </button>
         </div>
