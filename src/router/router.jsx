@@ -4,6 +4,8 @@ import Home from '../components/Home';
 import Login from '../pages/Authentication/Login';
 import Register from '../pages/Authentication/Register';
 import AddVolunteer from '../pages/AllPage/AddVolunteer';
+import AllVolunteer from '../pages/AllPage/AllVolunteer';
+import VolunteerDetails from '../pages/AllPage/VolunteerDetails';
 
 const router = createBrowserRouter([
     {
@@ -26,7 +28,15 @@ const router = createBrowserRouter([
             {
                 path: '/volunteer-needs',
                 element: <AddVolunteer></AddVolunteer>
-            }
+            },
+            {
+                path: '/all-volunteer',
+                element: <AllVolunteer></AllVolunteer>
+            },
+            {
+                path: "/volunteer/:id",
+                element: <VolunteerDetails></VolunteerDetails>
+            },
         ]
     }
 ])

@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/volunteer-needs">All Volunteer</Link>
+            <Link to="/all-volunteer">All Volunteer</Link>
           </li>
           {/* Conditional Login/Logout Button */}
           {user ? (
@@ -137,7 +137,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/volunteer-needs">All Volunteer</Link>
+              <Link to="/all-volunteer">All Volunteer</Link>
             </li>
             {user ? (
               <>
