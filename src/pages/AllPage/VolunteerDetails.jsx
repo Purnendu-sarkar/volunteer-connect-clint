@@ -1,12 +1,62 @@
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const VolunteerDetails = () => {
-    return (
+  const { id } = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/volunteerPost/${id}`
+        );
+        setPost(response.data);
+      } catch (error) {
+        console.error("Error fetching post details:", error);
+      }
+    };
+    fetchPost();
+  }, [id]);
+//   console.log(post, id);
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center text-purple-700 mb-8 sm:text-5xl">
+        {post.title}
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <img
+          src={post.thumbnail}
+          alt={post.title}
+          className="w-full h-60 object-cover rounded-lg shadow-lg md:h-80"
+        />
         <div>
-            <h1>Volunteer Details</h1>
-            <p>Here you can find the details of the volunteer.</p>
+          <p className="text-gray-700 text-lg mb-4">
+            <strong>Description:</strong> {post.description}
+          </p>
+          <p className="text-gray-700 text-lg mb-4">
+            <strong>Location:</strong> {post.location}
+          </p>
+          <p className="text-gray-700 text-lg mb-4">
+            <strong>Volunteers Needed:</strong> {post.volunteersNeeded}
+          </p>
+          <p className="text-gray-700 text-lg mb-6">
+            <strong>Deadline:</strong>{" "}
+            {new Date(post.deadline).toLocaleDateString()}
+          </p>
+          <button className="w-full bg-purple-600 text-white py-3 rounded-md text-lg hover:bg-purple-700 transition">
+            Be a Volunteer
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default VolunteerDetails;
