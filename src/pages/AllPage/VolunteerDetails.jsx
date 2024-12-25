@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const VolunteerDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -50,9 +51,7 @@ const VolunteerDetails = () => {
             <strong>Deadline:</strong>{" "}
             {new Date(post.deadline).toLocaleDateString()}
           </p>
-          <button className="bg-purple-600 text-white py-2 px-4 rounded-md">
-            Be a Volunteer
-          </button>
+          <button className="bg-purple-600 text-white py-2 px-4 rounded-md" onClick={() => navigate(`/be-volunteer/${id}`)}>Be a Volunteer</button>
         </div>
       </div>
     </div>

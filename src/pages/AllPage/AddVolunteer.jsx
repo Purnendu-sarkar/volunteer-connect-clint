@@ -85,7 +85,7 @@ const AddVolunteer = () => {
       }
     } catch (error) {
       toast.error("Failed to add post. Try again!", {
-        position: toast.POSITION.TOP_CENTER,
+        position: "top-center",
       });
       console.error("Error adding post:", error);
     }

@@ -60,7 +60,7 @@ const AllVolunteer = () => {
             </p>
             <Link
           to={`/volunteer/${post._id}`}
-          className="inline-block bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
+          className="inline-block text-center bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
         >
           View Details
         </Link>
