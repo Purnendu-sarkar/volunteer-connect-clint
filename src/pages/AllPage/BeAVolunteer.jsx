@@ -2,12 +2,24 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BeAVolunteer = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [post, setPost] = useState(null);
   const [suggestion, setSuggestion] = useState("");
+  const [hasRequested, setHasRequested] = useState(false);
+
+  // Format date function
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -15,7 +27,14 @@ const BeAVolunteer = () => {
         const response = await axios.get(
           `http://localhost:5000/volunteerPost/${id}`
         );
-        setPost(response.data);
+        const postData = response.data;
+
+        // Format the deadline before setting it
+        if (postData.deadline) {
+          postData.deadline = formatDate(postData.deadline);
+        }
+
+        setPost(postData);
       } catch (error) {
         console.error("Error fetching post:", error);
       }
@@ -23,8 +42,14 @@ const BeAVolunteer = () => {
     fetchPost();
   }, [id]);
 
-
   const handleRequest = async () => {
+    if (hasRequested) {
+      toast.error("You have already submitted a request!", {
+        position: "top-center",
+      });
+      return;
+    }
+
     const requestData = {
       ...post,
       volunteerName: user?.displayName || "No Name",
@@ -34,19 +59,31 @@ const BeAVolunteer = () => {
     };
 
     try {
+      // Submit request
       await axios.post(
         `http://localhost:5000/requestVolunteer/${id}`,
         requestData
       );
 
       // Decrement "No. of volunteers needed"
+      const updatedPost = {
+        ...post,
+        volunteersNeeded: post.volunteersNeeded - 1,
+      };
       await axios.patch(`http://localhost:5000/volunteerPost/${id}`, {
         $inc: { volunteersNeeded: -1 },
       });
 
-      alert("Request submitted successfully!");
+      setPost(updatedPost);
+      setHasRequested(true);
+      toast.success("Request submitted successfully!", {
+        position: "top-center",
+      });
     } catch (error) {
       console.error("Error submitting request:", error);
+      toast.error("Error submitting request. Please try again!", {
+        position: "top-center",
+      });
     }
   };
 
