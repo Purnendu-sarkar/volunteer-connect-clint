@@ -8,13 +8,10 @@ const ManageMyPost = () => {
   const [myPosts, setMyPosts] = useState([]);
   const navigate = useNavigate();
 
-  // Fetching the posts of the logged-in user
   useEffect(() => {
     const fetchMyPosts = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/my-posts?email=${user.email}`
-        );
+        const response = await fetch(`http://localhost:5000/my-posts?email=${user.email}`);
         const data = await response.json();
         setMyPosts(data);
       } catch (error) {
@@ -31,15 +28,14 @@ const ManageMyPost = () => {
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
-  
+
     try {
       const response = await fetch(`http://localhost:5000/volunteerPost/${id}`, {
         method: "DELETE",
       });
       const result = await response.json();
-  
+
       if (response.ok) {
-        // Update state to remove deleted post
         setMyPosts(myPosts.filter((post) => post._id !== id));
         toast.success("Post deleted successfully");
       } else {
