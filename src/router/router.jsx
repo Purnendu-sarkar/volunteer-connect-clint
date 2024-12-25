@@ -10,12 +10,13 @@ import PrivateRoute from "../context/AuthContext/PrivateRoute";
 import ManageMyPost from "../pages/AllPage/ManageMyPost";
 import UpdatePost from "../pages/AllPage/UpdatePost";
 import BeAVolunteer from "../pages/AllPage/BeAVolunteer";
+import ErrorPage from "../pages/shared/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <h2>Not found</h2>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
