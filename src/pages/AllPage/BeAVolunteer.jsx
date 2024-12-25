@@ -71,7 +71,7 @@ const BeAVolunteer = () => {
         volunteersNeeded: post.volunteersNeeded - 1,
       };
       await axios.patch(`http://localhost:5000/volunteerPost/${id}`, {
-        $inc: { volunteersNeeded: -1 },
+        // $inc: { volunteersNeeded: -1 },
       });
 
       setPost(updatedPost);
