@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -7,6 +7,7 @@ import { Heart, LogOut } from "lucide-react";
 const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const navigate = useNavigate();
 
   // Handle user logout
@@ -18,15 +19,35 @@ const Navbar = () => {
       .catch((error) => console.error("Logout error:", error));
   };
 
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  useEffect(() => {
+    const theme = isDarkTheme ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [isDarkTheme]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setIsDarkTheme(savedTheme === "dark");
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  }, []);
+
   // Show loading spinner if loading
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="navbar bg-base-100 shadow-lg px-4 lg:px-8">
+    <div
+      className={`navbar bg-base-100 shadow-lg px-4 lg:px-8 ${isMenuOpen ? 'mb-56' : ''}`}
+    >
       {/* Website Name */}
-      <div className="flex-1">
+      <div className="flex-1 flex items-center justify-between">
         <Link
           to="/"
           className="text-2xl font-bold text-primary flex items-center"
@@ -36,6 +57,14 @@ const Navbar = () => {
             Volunteer Network
           </span>
         </Link>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 lg:ml-14 transition-colors"
+        >
+          {isDarkTheme ? "🌙 Dark Mode" : "🌞 Light Mode"}
+        </button>
       </div>
 
       {/* Desktop Menu */}
@@ -75,15 +104,19 @@ const Navbar = () => {
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <Link to="/">
+                    <Link to="/" onClick={() => setIsMenuOpen(false)}>
                       <span>{user.displayName}</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/volunteer-needs">Add Volunteer</Link>
+                    <Link to="/volunteer-needs" onClick={() => setIsMenuOpen(false)}>
+                      Add Volunteer
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/manage-posts">Manage My Posts</Link>
+                    <Link to="/manage-posts" onClick={() => setIsMenuOpen(false)}>
+                      Manage My Posts
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -134,18 +167,26 @@ const Navbar = () => {
         <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md lg:hidden">
           <ul className="menu menu-vertical px-4">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/all-volunteer">All Volunteer</Link>
+              <Link to="/all-volunteer" onClick={() => setIsMenuOpen(false)}>
+                All Volunteer
+              </Link>
             </li>
             {user ? (
               <>
                 <li>
-                  <Link to="/volunteer-needs">Add Volunteer</Link>
+                  <Link to="/volunteer-needs" onClick={() => setIsMenuOpen(false)}>
+                    Add Volunteer
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/manage-posts">Manage My Posts</Link>
+                  <Link to="/manage-posts" onClick={() => setIsMenuOpen(false)}>
+                    Manage My Posts
+                  </Link>
                 </li>
                 <li>
                   <button onClick={handleLogout} className="btn btn-outline">
