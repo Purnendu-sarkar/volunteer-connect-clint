@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AllVolunteer = () => {
   const [posts, setPosts] = useState([]);
@@ -26,6 +27,9 @@ const AllVolunteer = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>ALL Volunteer | Volunteer</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6">
         All Volunteer Posts
       </h2>
@@ -59,11 +63,11 @@ const AllVolunteer = () => {
               Volunteers Needed: {post.volunteersNeeded}
             </p>
             <Link
-          to={`/volunteer/${post._id}`}
-          className="inline-block text-center bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
-        >
-          View Details
-        </Link>
+              to={`/volunteer/${post._id}`}
+              className="inline-block text-center bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
+            >
+              View Details
+            </Link>
           </div>
         ))}
       </div>

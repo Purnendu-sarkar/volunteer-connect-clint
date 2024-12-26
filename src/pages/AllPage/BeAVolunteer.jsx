@@ -4,6 +4,7 @@ import axios from "axios";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const BeAVolunteer = () => {
   const { id } = useParams();
@@ -62,13 +63,12 @@ const BeAVolunteer = () => {
       deadline: post.deadline,
       organizerName: post.organizerName,
       organizerEmail: post.organizerEmail,
-    
+
       volunteerName: user?.displayName || "No Name",
       volunteerEmail: user?.email || "No Email",
       suggestion,
       status: "requested",
     };
-    
 
     try {
       // Submit request
@@ -105,6 +105,9 @@ const BeAVolunteer = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <Helmet>
+        <title>Be A Volunteer | Volunteer</title>
+      </Helmet>
       <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">
         Be a Volunteer
       </h1>

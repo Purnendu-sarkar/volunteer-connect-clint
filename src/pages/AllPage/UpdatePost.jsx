@@ -6,10 +6,11 @@ import AuthContext from "../../context/AuthContext/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const UpdatePost = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -94,6 +95,9 @@ const UpdatePost = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>Update Post | Volunteer</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6 text-primary">
         Update Volunteer Need Post
       </h2>

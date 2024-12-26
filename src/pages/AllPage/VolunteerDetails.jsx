@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const VolunteerDetails = () => {
   const { id } = useParams();
@@ -28,6 +29,9 @@ const VolunteerDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>Volunteer Details | Volunteer</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center text-purple-700 mb-8 sm:text-5xl">
         {post.title}
       </h1>
@@ -51,7 +55,12 @@ const VolunteerDetails = () => {
             <strong>Deadline:</strong>{" "}
             {new Date(post.deadline).toLocaleDateString()}
           </p>
-          <button className="bg-purple-600 text-white py-2 px-4 rounded-md" onClick={() => navigate(`/be-volunteer/${id}`)}>Be a Volunteer</button>
+          <button
+            className="bg-purple-600 text-white py-2 px-4 rounded-md"
+            onClick={() => navigate(`/be-volunteer/${id}`)}
+          >
+            Be a Volunteer
+          </button>
         </div>
       </div>
     </div>

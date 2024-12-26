@@ -3,6 +3,7 @@ import axios from "axios";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const MyVolunteerRequests = () => {
   const { user } = useContext(AuthContext);
@@ -36,9 +37,10 @@ const MyVolunteerRequests = () => {
     );
     if (confirmation) {
       try {
-        // DELETE রিকুয়েস্ট পাঠান
-        await axios.delete(`http://localhost:5000/my-volunteer-requests/${requestId}`);
-        // আপডেট করা রিকুয়েস্ট লিস্ট
+        await axios.delete(
+          `http://localhost:5000/my-volunteer-requests/${requestId}`
+        );
+
         setRequests((prevRequests) =>
           prevRequests.filter((request) => request._id !== requestId)
         );
@@ -53,10 +55,12 @@ const MyVolunteerRequests = () => {
       }
     }
   };
-  
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <Helmet>
+        <title>Volunteer Request | Volunteer</title>
+      </Helmet>
       <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">
         My Volunteer Requests
       </h1>
@@ -64,7 +68,8 @@ const MyVolunteerRequests = () => {
       {/* Display a message if no requests are found */}
       {requests.length === 0 ? (
         <div className="text-center text-xl text-gray-500">
-          You have not requested to volunteer for any event yet. Start exploring!
+          You have not requested to volunteer for any event yet. Start
+          exploring!
         </div>
       ) : (
         <div className="overflow-x-auto">

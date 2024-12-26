@@ -6,6 +6,7 @@ import SocialLogin from "../shared/SocialLogin";
 import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 // Register Component
 const Register = () => {
@@ -59,6 +60,9 @@ const Register = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+        <title>Register | Volunteer</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse">
         {/* Lottie Animation */}
         <div className="text-center lg:text-left w-96">

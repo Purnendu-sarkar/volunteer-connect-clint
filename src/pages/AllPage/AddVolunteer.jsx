@@ -5,6 +5,7 @@ import AuthContext from "../../context/AuthContext/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const AddVolunteer = () => {
   const { user } = useContext(AuthContext);
@@ -26,9 +27,12 @@ const AddVolunteer = () => {
     if (name === "thumbnail") {
       const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
       if (!urlPattern.test(value)) {
-        toast.error("Please enter a valid image URL (png, jpg, jpeg, gif, webp, svg).", {
-          position: "top-center",
-        });
+        toast.error(
+          "Please enter a valid image URL (png, jpg, jpeg, gif, webp, svg).",
+          {
+            position: "top-center",
+          }
+        );
         return;
       }
     }
@@ -62,13 +66,16 @@ const AddVolunteer = () => {
     e.preventDefault();
     const postData = {
       ...formData,
-      volunteersNeeded: parseInt(formData.volunteersNeeded, 10), // Convert to number
+      volunteersNeeded: parseInt(formData.volunteersNeeded, 10),
       organizerName: user.displayName,
       organizerEmail: user.email,
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/addPost", postData);
+      const response = await axios.post(
+        "http://localhost:5000/addPost",
+        postData
+      );
       if (response.data.insertedId) {
         toast.success("Post added successfully!", {
           position: "top-center",
@@ -93,6 +100,9 @@ const AddVolunteer = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>AddVolunteer | Volunteer</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6 text-primary">
         Add Volunteer Need Post
       </h2>
@@ -102,7 +112,9 @@ const AddVolunteer = () => {
       >
         {/* Thumbnail */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Thumbnail</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Thumbnail
+          </label>
           <input
             type="text"
             name="thumbnail"
@@ -116,7 +128,9 @@ const AddVolunteer = () => {
 
         {/* Post Title */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Post Title</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Post Title
+          </label>
           <input
             type="text"
             name="title"
@@ -130,7 +144,9 @@ const AddVolunteer = () => {
 
         {/* Description */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Description</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Description
+          </label>
           <textarea
             name="description"
             value={formData.description}
@@ -143,7 +159,9 @@ const AddVolunteer = () => {
 
         {/* Category */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Category</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Category
+          </label>
           <select
             name="category"
             value={formData.category}
@@ -161,7 +179,9 @@ const AddVolunteer = () => {
 
         {/* Location */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Location</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Location
+          </label>
           <input
             type="text"
             name="location"
@@ -191,7 +211,9 @@ const AddVolunteer = () => {
 
         {/* Deadline */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Deadline</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Deadline
+          </label>
           <DatePicker
             selected={formData.deadline}
             onChange={handleDateChange}
@@ -201,7 +223,9 @@ const AddVolunteer = () => {
 
         {/* Organizer Name */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Organizer Name</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Organizer Name
+          </label>
           <input
             type="text"
             value={user?.displayName || "N/A"}
@@ -212,7 +236,9 @@ const AddVolunteer = () => {
 
         {/* Organizer Email */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">Organizer Email</label>
+          <label className="block mb-1 font-semibold text-gray-700">
+            Organizer Email
+          </label>
           <input
             type="email"
             value={user?.email || "N/A"}

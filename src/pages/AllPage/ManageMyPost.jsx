@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import { Helmet } from "react-helmet-async";
 
 const ManageMyPost = () => {
   const { user } = useContext(AuthContext);
@@ -11,7 +12,9 @@ const ManageMyPost = () => {
   useEffect(() => {
     const fetchMyPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/my-posts?email=${user.email}`);
+        const response = await fetch(
+          `http://localhost:5000/my-posts?email=${user.email}`
+        );
         const data = await response.json();
         setMyPosts(data);
       } catch (error) {
@@ -26,13 +29,18 @@ const ManageMyPost = () => {
 
   // Delete post
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/volunteerPost/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:5000/volunteerPost/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const result = await response.json();
 
       if (response.ok) {
@@ -48,26 +56,41 @@ const ManageMyPost = () => {
 
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>Manage Post | Volunteer</title>
+      </Helmet>
       <h1 className="text-3xl font-semibold text-center text-gray-800 mb-8">
         My Volunteer Need Posts
       </h1>
       {myPosts.length === 0 ? (
-        <p className="text-gray-500 text-center">You haven't added any posts yet.</p>
+        <p className="text-gray-500 text-center">
+          You haven't added any posts yet.
+        </p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
             <thead>
               <tr className="bg-blue-100">
-                <th className="border p-3 text-left text-sm font-medium text-gray-700">Title</th>
-                <th className="border p-3 text-left text-sm font-medium text-gray-700">Category</th>
-                <th className="border p-3 text-center text-sm font-medium text-gray-700">Actions</th>
+                <th className="border p-3 text-left text-sm font-medium text-gray-700">
+                  Title
+                </th>
+                <th className="border p-3 text-left text-sm font-medium text-gray-700">
+                  Category
+                </th>
+                <th className="border p-3 text-center text-sm font-medium text-gray-700">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {myPosts.map((post) => (
                 <tr key={post._id} className="border-t hover:bg-gray-50">
-                  <td className="border p-3 text-sm text-gray-700">{post.title}</td>
-                  <td className="border p-3 text-sm text-gray-700">{post.category}</td>
+                  <td className="border p-3 text-sm text-gray-700">
+                    {post.title}
+                  </td>
+                  <td className="border p-3 text-sm text-gray-700">
+                    {post.category}
+                  </td>
                   <td className="border p-3 text-center space-x-2">
                     <button
                       onClick={() => navigate(`/update-post/${post._id}`)}
