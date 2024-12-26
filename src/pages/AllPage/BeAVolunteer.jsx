@@ -50,13 +50,25 @@ const BeAVolunteer = () => {
       return;
     }
 
+    console.log(post);
     const requestData = {
-      ...post,
+      requestId: id,
+      thumbnail: post.thumbnail,
+      title: post.title,
+      description: post.description,
+      category: post.category,
+      location: post.location,
+      volunteersNeeded: post.volunteersNeeded,
+      deadline: post.deadline,
+      organizerName: post.organizerName,
+      organizerEmail: post.organizerEmail,
+    
       volunteerName: user?.displayName || "No Name",
       volunteerEmail: user?.email || "No Email",
       suggestion,
       status: "requested",
     };
+    
 
     try {
       // Submit request

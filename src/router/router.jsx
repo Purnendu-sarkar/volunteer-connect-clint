@@ -11,6 +11,7 @@ import ManageMyPost from "../pages/AllPage/ManageMyPost";
 import UpdatePost from "../pages/AllPage/UpdatePost";
 import BeAVolunteer from "../pages/AllPage/BeAVolunteer";
 import ErrorPage from "../pages/shared/ErrorPage";
+import MyVolunteerRequests from "../pages/AllPage/MyVolunteerRequests";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/my-volunteer-requests",
+        element: (
+          <PrivateRoute>
+            <MyVolunteerRequests></MyVolunteerRequests>
+          </PrivateRoute>
+        ),
+      }
     ],
   },
 ]);

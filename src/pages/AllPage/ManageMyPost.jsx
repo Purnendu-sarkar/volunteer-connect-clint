@@ -47,42 +47,46 @@ const ManageMyPost = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-12">
-      <h1 className="text-2xl font-bold mb-6">My Volunteer Need Posts</h1>
+    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+        My Volunteer Need Posts
+      </h1>
       {myPosts.length === 0 ? (
-        <p className="text-gray-500">You haven't added any posts yet.</p>
+        <p className="text-gray-500 text-center">You haven't added any posts yet.</p>
       ) : (
-        <table className="w-full border-collapse border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2">Title</th>
-              <th className="border p-2">Category</th>
-              <th className="border p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {myPosts.map((post) => (
-              <tr key={post._id} className="border-t">
-                <td className="border p-2">{post.title}</td>
-                <td className="border p-2">{post.category}</td>
-                <td className="border p-2 space-x-2">
-                  <button
-                    onClick={() => navigate(`/update-post/${post._id}`)}
-                    className="bg-blue-500 text-white px-4 py-1 rounded"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => handleDelete(post._id)}
-                    className="bg-red-500 text-white px-4 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead>
+              <tr className="bg-blue-100">
+                <th className="border p-3 text-left text-sm font-medium text-gray-700">Title</th>
+                <th className="border p-3 text-left text-sm font-medium text-gray-700">Category</th>
+                <th className="border p-3 text-center text-sm font-medium text-gray-700">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {myPosts.map((post) => (
+                <tr key={post._id} className="border-t hover:bg-gray-50">
+                  <td className="border p-3 text-sm text-gray-700">{post.title}</td>
+                  <td className="border p-3 text-sm text-gray-700">{post.category}</td>
+                  <td className="border p-3 text-center space-x-2">
+                    <button
+                      onClick={() => navigate(`/update-post/${post._id}`)}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDelete(post._id)}
+                      className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

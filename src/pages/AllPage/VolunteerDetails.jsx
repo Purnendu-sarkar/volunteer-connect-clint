@@ -35,7 +35,7 @@ const VolunteerDetails = () => {
         <img
           src={post.thumbnail}
           alt={post.title}
-          className="w-full h-60 object-cover rounded-lg shadow-lg md:h-80"
+          className="w-full h-full object-cover rounded-lg shadow-lg md:h-96"
         />
         <div>
           <p className="text-gray-700 text-lg mb-4">
