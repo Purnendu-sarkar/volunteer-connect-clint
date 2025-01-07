@@ -45,9 +45,9 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInUser = (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  // console.log(loading);
 
 
   const singInWithGoogle = () => {
@@ -62,6 +62,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         // If user exists, set with full profile
@@ -71,11 +72,13 @@ const AuthProvider = ({ children }) => {
           displayName: currentUser.displayName || "No Name",
           photoURL: currentUser.photoURL || "",
         });
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
-      console.log("state captured", currentUser);
-      setLoading(false);
+      // console.log("state captured", currentUser);
+      
     });
     return () => {
       unsubscribe();

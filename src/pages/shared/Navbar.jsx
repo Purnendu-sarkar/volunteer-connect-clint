@@ -44,7 +44,9 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar bg-base-100 shadow-lg px-4 lg:px-8 ${isMenuOpen ? 'mb-56' : ''}`}
+      className={`navbar bg-base-100 shadow-lg px-4 lg:px-8 ${
+        isMenuOpen ? "mb-56" : ""
+      }`}
     >
       {/* Website Name */}
       <div className="flex-1 flex items-center justify-between">
@@ -80,7 +82,7 @@ const Navbar = () => {
           {user ? (
             <>
               {/* User Profile with Tooltip */}
-              <div className="dropdown dropdown-end">
+              <div className="dropdown dropdown-end relative z-50">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                     {user.photoURL ? (
@@ -101,7 +103,7 @@ const Navbar = () => {
                 {/* Dropdown Menu */}
                 <ul
                   tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 relative z-50"
                 >
                   <li>
                     <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -109,12 +111,18 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/volunteer-needs" onClick={() => setIsMenuOpen(false)}>
+                    <Link
+                      to="/volunteer-needs"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
                       Add Volunteer
                     </Link>
                   </li>
                   <li>
-                    <Link to="/manage-posts" onClick={() => setIsMenuOpen(false)}>
+                    <Link
+                      to="/manage-posts"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
                       Manage My Posts
                     </Link>
                   </li>
@@ -164,7 +172,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md lg:hidden">
+        <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md lg:hidden z-50">
           <ul className="menu menu-vertical px-4">
             <li>
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -179,7 +187,10 @@ const Navbar = () => {
             {user ? (
               <>
                 <li>
-                  <Link to="/volunteer-needs" onClick={() => setIsMenuOpen(false)}>
+                  <Link
+                    to="/volunteer-needs"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Add Volunteer
                   </Link>
                 </li>

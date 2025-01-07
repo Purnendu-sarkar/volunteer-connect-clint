@@ -11,7 +11,9 @@ import ManageMyPost from "../pages/AllPage/ManageMyPost";
 import UpdatePost from "../pages/AllPage/UpdatePost";
 import BeAVolunteer from "../pages/AllPage/BeAVolunteer";
 import ErrorPage from "../pages/shared/ErrorPage";
-import MyVolunteerRequests from "../pages/AllPage/MyVolunteerRequests";
+// import MyVolunteerRequests from "../pages/AllPage/MyVolunteerRequests";
+import RequestsByOwner from "../pages/AllPage/RequestsByOwner";
+import ManagePost from "../pages/AllPage/ManagePost";
 
 const router = createBrowserRouter([
   {
@@ -75,14 +77,30 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // {
+      //   path: "/my-volunteer-requests",
+      //   element: (
+      //     <PrivateRoute>
+      //       <MyVolunteerRequests></MyVolunteerRequests>
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
-        path: "/my-volunteer-requests",
+        path: "/requests-by-owner",
         element: (
           <PrivateRoute>
-            <MyVolunteerRequests></MyVolunteerRequests>
+            <RequestsByOwner></RequestsByOwner>
           </PrivateRoute>
         ),
-      }
+      },
+      {
+        path: "/manage-post",
+        element: (
+          <PrivateRoute>
+            <ManagePost></ManagePost>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

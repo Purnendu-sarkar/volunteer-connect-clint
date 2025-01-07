@@ -51,7 +51,6 @@ const BeAVolunteer = () => {
       return;
     }
 
-    console.log(post);
     const requestData = {
       requestId: id,
       thumbnail: post.thumbnail,
@@ -63,7 +62,6 @@ const BeAVolunteer = () => {
       deadline: post.deadline,
       organizerName: post.organizerName,
       organizerEmail: post.organizerEmail,
-
       volunteerName: user?.displayName || "No Name",
       volunteerEmail: user?.email || "No Email",
       suggestion,
@@ -71,31 +69,31 @@ const BeAVolunteer = () => {
     };
 
     try {
-      // Submit request
-      await axios.post(
+      const response = await axios.post(
         `http://localhost:5000/requestVolunteer/${id}`,
         requestData
       );
 
-      // Decrement "No. of volunteers needed"
-      const updatedPost = {
-        ...post,
-        volunteersNeeded: post.volunteersNeeded - 1,
-      };
-      await axios.patch(`http://localhost:5000/volunteerPost/${id}`, {
-        // $inc: { volunteersNeeded: -1 },
-      });
-
-      setPost(updatedPost);
-      setHasRequested(true);
-      toast.success("Request submitted successfully!", {
-        position: "top-center",
-      });
+      if (response.status === 200) {
+        setPost((prevPost) => ({
+          ...prevPost,
+          volunteersNeeded: prevPost.volunteersNeeded - 1,
+        }));
+        setHasRequested(true);
+        toast.success("Request submitted successfully!", {
+          position: "top-center",
+        });
+      }
     } catch (error) {
-      console.error("Error submitting request:", error);
-      toast.error("Error submitting request. Please try again!", {
-        position: "top-center",
-      });
+      if (error.response?.status === 400) {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("Error submitting request. Please try again!", {
+          position: "top-center",
+        });
+      }
     }
   };
 

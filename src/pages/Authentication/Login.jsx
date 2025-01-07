@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import Lottie from "lottie-react";
 import loginLottie from "../../assets/lottie/login.json";
@@ -8,33 +8,34 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-
 const Login = () => {
-  const { signInUser } = useContext(AuthContext); 
+  const { signInUser, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Function to handle form submission
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value; 
-    const password = form.password.value; 
-    console.log(email, password);
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
 
     // Attempt to sign in using provided email and password
     signInUser(email, password)
       .then((result) => {
         console.log("Sign in successful:", result.user);
         toast.success("Login successful!");
-        form.reset(); 
+        form.reset();
         navigate("/");
       })
       .catch((error) => {
         console.error("Sign in error:", error);
-        toast.error("Invalid email or password!");
+        toast.error("An error occurred. Please try again later.");
       });
   };
-
+  if (loading) {
+    return <h1>loading</h1>;
+  }
   return (
     <div className="hero bg-base-200 min-h-screen">
       <Helmet>
@@ -85,9 +86,11 @@ const Login = () => {
 
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
+              <input
+                type="submit"
+                value={"Login"}
+                className="btn btn-primary"
+              />
             </div>
           </form>
           {/* Link to Register Page */}

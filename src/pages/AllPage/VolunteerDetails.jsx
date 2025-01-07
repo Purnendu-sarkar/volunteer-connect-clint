@@ -55,12 +55,18 @@ const VolunteerDetails = () => {
             <strong>Deadline:</strong>{" "}
             {new Date(post.deadline).toLocaleDateString()}
           </p>
-          <button
-            className="bg-purple-600 text-white py-2 px-4 rounded-md"
-            onClick={() => navigate(`/be-volunteer/${id}`)}
-          >
-            Be a Volunteer
-          </button>
+          {post.volunteersNeeded > 0 ? (
+            <button
+              className="bg-purple-600 text-white py-2 px-4 rounded-md"
+              onClick={() => navigate(`/be-volunteer/${id}`)}
+            >
+              Be a Volunteer
+            </button>
+          ) : (
+            <p className="text-red-600 font-bold">
+              No more volunteers needed for this post
+            </p>
+          )}
         </div>
       </div>
     </div>

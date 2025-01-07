@@ -51,10 +51,22 @@ const UpdatePost = () => {
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === "volunteersNeeded") {
+      const numberValue = parseInt(value, 10);
+      if (numberValue < 0) {
+        toast.error("Number of volunteers cannot be less than 0.");
+        return;
+      }
+      setFormData({
+        ...formData,
+        [name]: numberValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   // Handle date change for the deadline
@@ -70,6 +82,7 @@ const UpdatePost = () => {
     e.preventDefault();
     const updatedData = {
       ...formData,
+      volunteersNeeded: parseInt(formData.volunteersNeeded, 10),
       organizerName: user.displayName,
       organizerEmail: user.email,
     };
@@ -79,19 +92,20 @@ const UpdatePost = () => {
         `http://localhost:5000/volunteerPost/${id}`,
         updatedData
       );
-      console.log(response);
+      // console.log(response);
       if (response.data.result.modifiedCount > 0) {
         toast.success("Post updated successfully!");
         navigate("/manage-posts");
-        console.log(response.data.result.modifiedCount);
+        // console.log(response.data.result.modifiedCount);
       } else {
         toast.info("No changes were made to the post.");
-        console.log(response.data.result.result.modifiedCount);
+        // console.log(response.data.result.result.modifiedCount);
       }
     } catch (error) {
       toast.error("Failed to update the post.");
     }
   };
+  console.log(formData)
 
   return (
     <div className="container mx-auto px-4 py-8">

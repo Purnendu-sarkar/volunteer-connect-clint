@@ -52,14 +52,20 @@ const AddVolunteer = () => {
       [name]: value,
     });
   };
-
-  // Handle date change for deadline
   const handleDateChange = (date) => {
+    const today = new Date();
+    if (date < today) {
+      toast.error("Please select a future date for the deadline.", {
+        position: "top-center",
+      });
+      return;
+    }
     setFormData({
       ...formData,
       deadline: date,
     });
   };
+  
 
   // Handle form submission
   const handleSubmit = async (e) => {

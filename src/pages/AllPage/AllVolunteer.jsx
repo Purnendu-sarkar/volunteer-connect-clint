@@ -32,14 +32,6 @@ const AllVolunteer = () => {
       <Helmet>
         <title>All Volunteers | Professional Design</title>
       </Helmet>
-
-      {/* Header Section */}
-      <header className="bg-white shadow-md py-4 px-6 sticky top-0 z-50">
-        <h1 className="text-2xl font-bold text-blue-600">
-          Volunteer Recruitment Platform
-        </h1>
-      </header>
-
       {/* Main Section */}
       <main className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
