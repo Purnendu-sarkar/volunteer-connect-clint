@@ -14,7 +14,8 @@ const ManagePost = () => {
     const fetchMyPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/my-posts?email=${user.email}`
+          `http://localhost:5000/my-posts?email=${user.email}`,
+          // { withCredentials: true}
         );
         const data = await response.json();
         setMyPosts(data);
