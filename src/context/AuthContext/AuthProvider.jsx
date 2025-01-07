@@ -11,6 +11,7 @@ import {
 import auth from "../../firebase/firebase.init";
 import { updateProfile } from "firebase/auth";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -61,25 +62,44 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+
   useEffect(() => {
-    setLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        // If user exists, set with full profile
-        setUser({
-          uid: currentUser.uid,
-          email: currentUser.email,
-          displayName: currentUser.displayName || "No Name",
-          photoURL: currentUser.photoURL || "",
-        });
-        setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("CurrentUser-->", currentUser);
+      setLoading(true);
+
+      if (currentUser?.email) {
+        setUser(currentUser);
+
+        try {
+          // Request JWT from the backend
+          const { data } = await axios.post(
+            `http://localhost:5000/jwt`,
+            { email: currentUser?.email },
+            { withCredentials: true }
+          );
+          console.log("JWT Received:", data);
+        } catch (error) {
+          console.error("Error fetching JWT:", error);
+        }
       } else {
         setUser(null);
-        setLoading(false);
+
+        try {
+          // Logout user and clear cookies from backend
+          const { data } = await axios.get(
+            `http://localhost:5000/logout`,
+            { withCredentials: true }
+          );
+          console.log("User logged out:", data);
+        } catch (error) {
+          console.error("Error during logout:", error);
+        }
       }
-      // console.log("state captured", currentUser);
-      
+
+      setLoading(false);
     });
+
     return () => {
       unsubscribe();
     };
