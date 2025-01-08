@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
         photoURL: photoURL || "",
       })
         .then(() => {
-          console.log("Profile updated successfully!");
+          // console.log("Profile updated successfully!");
           // Ensure the updated user is set
           setUser({
             ...result.user,
@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("CurrentUser-->", currentUser);
+      // console.log("CurrentUser-->", currentUser);
       setLoading(true);
 
       if (currentUser?.email) {
@@ -74,11 +74,12 @@ const AuthProvider = ({ children }) => {
         try {
           // Request JWT from the backend
           const { data } = await axios.post(
-            `http://localhost:5000/jwt`,
+            `https://volunteer-server-nu.vercel.app/jwt`,
             { email: currentUser?.email },
             { withCredentials: true }
           );
-          console.log("JWT Received:", data);
+          localStorage.setItem("jwt", data.token);
+          // console.log("JWT Received:", data);
         } catch (error) {
           console.error("Error fetching JWT:", error);
         }
@@ -88,10 +89,10 @@ const AuthProvider = ({ children }) => {
         try {
           // Logout user and clear cookies from backend
           const { data } = await axios.get(
-            `http://localhost:5000/logout`,
+            `https://volunteer-server-nu.vercel.app/logout`,
             { withCredentials: true }
           );
-          console.log("User logged out:", data);
+          // console.log("User logged out:", data);
         } catch (error) {
           console.error("Error during logout:", error);
         }

@@ -83,33 +83,43 @@ const Navbar = () => {
             <>
               {/* User Profile with Tooltip */}
               <div className="dropdown dropdown-end relative z-50">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt="User Avatar" />
-                    ) : (
-                      <div className="bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                        <span className="text-xl font-bold">
-                          {user.displayName ? user.displayName[0] : "N/A"}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </label>
-                {/* Tooltip for Display Name */}
-                <ReactTooltip id="user-tooltip" place="bottom" effect="solid">
-                  {user.displayName}
-                </ReactTooltip>
+                {/* User Profile with Tooltip */}
+                <div className="dropdown dropdown-end relative z-50">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                    data-tooltip-id="user-tooltip"
+                    data-tooltip-content={user.displayName || "No Name"}
+                  >
+                    <div className="w-10 rounded-full">
+                      {user.photoURL ? (
+                        <img src={user.photoURL} alt="User Avatar" />
+                      ) : (
+                        <div className="bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
+                          <span className="text-xl font-bold">
+                            {user.displayName ? user.displayName[0] : "N/A"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </label>
+                  {/* Tooltip for Display Name */}
+                  <ReactTooltip
+                    id="user-tooltip"
+                    place="bottom"
+                    effect="solid"
+                  />
+                </div>
                 {/* Dropdown Menu */}
                 <ul
                   tabIndex={0}
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 relative z-50"
                 >
-                  <li>
+                  {/* <li>
                     <Link to="/" onClick={() => setIsMenuOpen(false)}>
                       <span>{user.displayName}</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/volunteer-needs"

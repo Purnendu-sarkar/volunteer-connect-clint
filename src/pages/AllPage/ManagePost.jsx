@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { Helmet } from "react-helmet-async";
+// import axios from "axios";
 
 const ManagePost = () => {
   const { user } = useContext(AuthContext);
@@ -14,8 +15,8 @@ const ManagePost = () => {
     const fetchMyPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/my-posts?email=${user.email}`,
-          // { withCredentials: true}
+          `https://volunteer-server-nu.vercel.app/my-posts?email=${user.email}&token=${localStorage.getItem("jwt")}`,
+          { credentials: "include"}
         );
         const data = await response.json();
         setMyPosts(data);
@@ -43,7 +44,7 @@ const ManagePost = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `http://localhost:5000/volunteerPost/${id}`,
+            `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`,
             {
               method: "DELETE",
             }

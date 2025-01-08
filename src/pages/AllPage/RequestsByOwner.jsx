@@ -15,7 +15,8 @@ const RequestsByOwner = () => {
     const fetchRequests = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/requests-by-owner?email=${user?.email}`
+          `https://volunteer-server-nu.vercel.app/requests-by-owner?email=${user?.email}`,
+          // { withCredentials: true}
         );
         setRequests(response.data);
       } catch (error) {
@@ -45,7 +46,7 @@ const RequestsByOwner = () => {
       if (result.isConfirmed) {
         try {
           await axios.delete(
-            `http://localhost:5000/my-volunteer-requests/${requestId}`
+            `https://volunteer-server-nu.vercel.app/my-volunteer-requests/${requestId}`
           );
 
           setRequests((prevRequests) =>

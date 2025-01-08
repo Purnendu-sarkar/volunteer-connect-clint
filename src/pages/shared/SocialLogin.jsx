@@ -11,7 +11,7 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     singInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast.success(`Welcome, ${result.user.displayName || "User"}!`, {
           position: "top-right",
         });

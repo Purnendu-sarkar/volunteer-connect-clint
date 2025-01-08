@@ -46,7 +46,7 @@ const Register = () => {
     // Call the createUser function from AuthContext
     createUser(email, password, name, photoURL)
       .then((user) => {
-        console.log("User created successfully:", user);
+        // console.log("User created successfully:", user);
         toast.success("Registration successful!");
         form.reset();
         signOutUser();

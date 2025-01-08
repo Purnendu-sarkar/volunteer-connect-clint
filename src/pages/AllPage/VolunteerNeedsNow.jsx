@@ -7,7 +7,7 @@ const VolunteerNeedsNow = () => {
     // Fetch the posts from the backend
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/volunteerNeedsNow");
+        const response = await fetch("https://volunteer-server-nu.vercel.app/volunteerNeedsNow");
         const data = await response.json();
         setPosts(data);
       } catch (error) {

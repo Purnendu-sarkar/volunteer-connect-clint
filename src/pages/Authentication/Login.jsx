@@ -23,7 +23,7 @@ const Login = () => {
     // Attempt to sign in using provided email and password
     signInUser(email, password)
       .then((result) => {
-        console.log("Sign in successful:", result.user);
+        // console.log("Sign in successful:", result.user);
         toast.success("Login successful!");
         form.reset();
         navigate("/");

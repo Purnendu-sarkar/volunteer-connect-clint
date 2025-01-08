@@ -26,7 +26,7 @@ const BeAVolunteer = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/volunteerPost/${id}`
+          `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`
         );
         const postData = response.data;
 
@@ -70,7 +70,7 @@ const BeAVolunteer = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/requestVolunteer/${id}`,
+        `https://volunteer-server-nu.vercel.app/requestVolunteer/${id}`,
         requestData
       );
 

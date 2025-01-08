@@ -28,7 +28,7 @@ const UpdatePost = () => {
     const fetchPostData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/volunteerPost/${id}`
+          `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`
         );
         const data = response.data;
         setFormData({
@@ -89,7 +89,7 @@ const UpdatePost = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/volunteerPost/${id}`,
+        `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`,
         updatedData
       );
       // console.log(response);
@@ -105,7 +105,7 @@ const UpdatePost = () => {
       toast.error("Failed to update the post.");
     }
   };
-  console.log(formData)
+  // console.log(formData)
 
   return (
     <div className="container mx-auto px-4 py-8">
