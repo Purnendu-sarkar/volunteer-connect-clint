@@ -1,6 +1,6 @@
 # Volunteer Network
 
-![Volunteer Screenshot] (https://i.ibb.co.com/n8VtHdvc/Volunteer.png)
+![Volunteer Screenshot](https://i.ibb.co.com/n8VtHdvc/Volunteer.png)
 
 A responsive, feature-rich platform to manage and engage with volunteer opportunities. This project demonstrates expertise in creating user-friendly interfaces, secure backends, and robust CRUD functionalities for real-world applications.
 
