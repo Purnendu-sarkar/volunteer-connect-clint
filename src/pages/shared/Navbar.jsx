@@ -1,27 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
-import { Tooltip as ReactTooltip } from "react-tooltip";
-import { Heart, LogOut } from "lucide-react";
+import {
+  X,
+  Heart,
+  LogOut,
+  Menu,
+  Home,
+  Users,
+  PlusCircle,
+  Settings,
+  Sun,
+  Moon,
+} from "lucide-react";
 
 const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
   const navigate = useNavigate();
-
-  // Handle user logout
-  const handleLogout = () => {
-    signOutUser()
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((error) => console.error("Logout error:", error));
-  };
-
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
 
   useEffect(() => {
     const theme = isDarkTheme ? "dark" : "light";
@@ -29,169 +29,163 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
   }, [isDarkTheme]);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDarkTheme(savedTheme === "dark");
-      document.documentElement.setAttribute("data-theme", savedTheme);
+  const handleLogout = () => {
+    signOutUser()
+      .then(() => navigate("/login"))
+      .catch((error) => console.error("Logout error:", error));
+  };
+
+  const closeDropdown = (event) => {
+    if (!event.target.closest(".profile-menu")) {
+      setIsProfileMenuOpen(false);
     }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", closeDropdown);
+    return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
-  // Show loading spinner if loading
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen text-xl font-semibold">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div
-      className={`navbar bg-base-100 shadow-lg px-4 lg:px-8 ${
-        isMenuOpen ? "mb-56" : ""
-      }`}
+    <nav
+      className={`fixed top-0 left-0 w-full ${
+        isDarkTheme ? "bg-gray-800 text-white" : "bg-white text-black"
+      } border-b border-gray-300 dark:border-gray-700 z-50 py-3 px-4 lg:px-8 flex items-center justify-between`}
     >
-      {/* Website Name */}
-      <div className="flex-1 flex items-center justify-between">
-        <Link
-          to="/"
-          className="text-2xl font-bold text-primary flex items-center"
-        >
-          <Heart className="h-8 w-8 text-rose-500" />
-          <span className="ml-2 text-xl font-bold text-gray-800">
-            Volunteer Network
-          </span>
-        </Link>
+      {/* Logo */}
+      <Link
+        to="/"
+        className="flex items-center font-bold text-2xl hover:scale-105 transition-transform duration-300"
+      >
+        <Heart className="h-8 w-8 text-rose-500" />
+        <span className="ml-2">Volunteer Network</span>
+      </Link>
 
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 lg:ml-14 transition-colors"
-        >
-          {isDarkTheme ? "🌙 Dark Mode" : "🌞 Light Mode"}
-        </button>
-      </div>
+      {/* Dark/Light Mode Toggle */}
+      <button
+        onClick={() => setIsDarkTheme(!isDarkTheme)}
+        className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-300"
+      >
+        {isDarkTheme ? (
+          <Sun className="h-6 w-6 text-yellow-400" />
+        ) : (
+          <Moon className="h-6 w-6 text-gray-700" />
+        )}
+      </button>
 
       {/* Desktop Menu */}
-      <div className="hidden lg:flex flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/all-volunteer">All Volunteer</Link>
-          </li>
-          {/* Conditional Login/Logout Button */}
-          {user ? (
-            <>
-              {/* User Profile with Tooltip */}
-              <div className="dropdown dropdown-end relative z-50">
-                {/* User Profile with Tooltip */}
-                <div className="dropdown dropdown-end relative z-50">
-                  <label
-                    tabIndex={0}
-                    className="btn btn-ghost btn-circle avatar"
-                    data-tooltip-id="user-tooltip"
-                    data-tooltip-content={user.displayName || "No Name"}
-                  >
-                    <div className="w-10 rounded-full">
-                      {user.photoURL ? (
-                        <img src={user.photoURL} alt="User Avatar" />
-                      ) : (
-                        <div className="bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                          <span className="text-xl font-bold">
-                            {user.displayName ? user.displayName[0] : "N/A"}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </label>
-                  {/* Tooltip for Display Name */}
-                  <ReactTooltip
-                    id="user-tooltip"
-                    place="bottom"
-                    effect="solid"
-                  />
-                </div>
-                {/* Dropdown Menu */}
+      <div className="hidden lg:flex gap-6 items-center">
+        <Link
+          to="/"
+          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+        >
+          <Home className="h-5 w-5" /> Home
+        </Link>
+        <Link
+          to="/all-volunteer"
+          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+        >
+          <Users className="h-5 w-5" /> All Volunteer
+        </Link>
+        {user ? (
+          <>
+            <Link
+              to="/volunteer-needs"
+              className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+            >
+              <PlusCircle className="h-5 w-5" /> Add Volunteer
+            </Link>
+            <Link
+              to="/manage-posts"
+              className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+            >
+              <Settings className="h-5 w-5" /> Manage Posts
+            </Link>
+
+            {/* Profile Dropdown */}
+            <div className="relative profile-menu">
+              <button
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                className="flex items-center"
+              >
+                <img
+                  src={user.photoURL || "default-avatar.png"}
+                  alt="User"
+                  className="w-10 h-10 rounded-full cursor-pointer hover:ring-2 hover:ring-rose-500 transition duration-300"
+                />
+              </button>
+              {isProfileMenuOpen && (
                 <ul
-                  tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 relative z-50"
+                  className={`absolute right-0 mt-2 w-48 ${
+                    isDarkTheme
+                      ? "bg-gray-800 text-white"
+                      : "bg-white text-black"
+                  } shadow-md p-2 rounded-md`}
                 >
-                  {/* <li>
-                    <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                      <span>{user.displayName}</span>
-                    </Link>
-                  </li> */}
-                  <li>
-                    <Link
-                      to="/volunteer-needs"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Add Volunteer
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/manage-posts"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Manage My Posts
-                    </Link>
+                  <li className="px-4 py-2">{user.displayName || "No Name"}</li>
+                  <li
+                    className="px-4 py-2 text-red-600 cursor-pointer flex items-center gap-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className="h-5 w-5" /> Logout
                   </li>
                 </ul>
-              </div>
-              {/* Logout Button */}
-              <li>
-                <button onClick={handleLogout} className="btn btn-outline">
-                  <LogOut className="h-5 w-5" />
-                </button>
-              </li>
-            </>
-          ) : (
-            <li>
-              <Link to="/login" className="btn btn-primary">
-                Login
-              </Link>
-            </li>
-          )}
-        </ul>
+              )}
+            </div>
+          </>
+        ) : (
+          <Link
+            to="/login"
+            className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+          >
+            <LogOut className="h-5 w-5" /> Login
+          </Link>
+        )}
       </div>
 
-      {/* Mobile Menu Toggle */}
-      <div className="lg:hidden">
-        <button
-          className="btn btn-ghost btn-circle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={
-                isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
-              }
-            />
-          </svg>
-        </button>
-      </div>
+      {/* Mobile Menu Button */}
+      <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+      </button>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md lg:hidden z-50">
-          <ul className="menu menu-vertical px-4">
+        <div
+          className={`fixed inset-0 ${
+            isDarkTheme ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
+          } flex flex-col items-center justify-center`}
+        >
+          <button
+            className="absolute top-4 right-4"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <X className="h-8 w-8" />
+          </button>
+          <ul className="space-y-4 text-center">
             <li>
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                Home
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2 text-2xl"
+              >
+                <Home className="h-6 w-6" /> Home
               </Link>
             </li>
             <li>
-              <Link to="/all-volunteer" onClick={() => setIsMenuOpen(false)}>
-                All Volunteer
+              <Link
+                to="/all-volunteer"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2 text-2xl"
+              >
+                <Users className="h-6 w-6" /> All Volunteer
               </Link>
             </li>
             {user ? (
@@ -200,32 +194,44 @@ const Navbar = () => {
                   <Link
                     to="/volunteer-needs"
                     onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-2 text-2xl"
                   >
-                    Add Volunteer
+                    <PlusCircle className="h-6 w-6" /> Add Volunteer
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-posts" onClick={() => setIsMenuOpen(false)}>
-                    Manage My Posts
+                  <Link
+                    to="/manage-posts"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-2 text-2xl"
+                  >
+                    <Settings className="h-6 w-6" /> Manage Posts
                   </Link>
                 </li>
                 <li>
-                  <button onClick={handleLogout} className="btn btn-outline">
-                    Logout
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 text-2xl text-red-600"
+                  >
+                    <LogOut className="h-6 w-6" /> Logout
                   </button>
                 </li>
               </>
             ) : (
               <li>
-                <Link to="/login" className="btn btn-primary">
-                  Login
+                <Link
+                  to="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-2 text-2xl"
+                >
+                  <LogOut className="h-6 w-6" /> Login
                 </Link>
               </li>
             )}
           </ul>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

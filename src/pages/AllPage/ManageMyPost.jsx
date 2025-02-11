@@ -14,7 +14,7 @@ const ManageMyPost = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-semibold text-center text-gray-800 mb-8">
         Manage My Posts
       </h1>
@@ -52,5 +52,3 @@ const ManageMyPost = () => {
 };
 
 export default ManageMyPost;
-
-
