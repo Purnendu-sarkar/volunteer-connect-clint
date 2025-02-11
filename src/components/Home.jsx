@@ -12,13 +12,13 @@ const Home = () => {
         <title>Home | Volunteer</title>
       </Helmet>
       <Slider></Slider>
-      <VolunteerNeedsNow></VolunteerNeedsNow>
-      <div className="text-center mb-5">
+      {/* <VolunteerNeedsNow></VolunteerNeedsNow> */}
+      {/* <div className="text-center mb-5">
         <NavLink to={"/all-volunteer"}>
           <button className="btn btn-primary px-9">See all</button>
         </NavLink>
       </div>
-      <VolunteersChart></VolunteersChart>
+      <VolunteersChart></VolunteersChart> */}
       <UpcomingEvents></UpcomingEvents>
     </div>
   );
