@@ -14,6 +14,7 @@ import ErrorPage from "../pages/shared/ErrorPage";
 // import MyVolunteerRequests from "../pages/AllPage/MyVolunteerRequests";
 import RequestsByOwner from "../pages/AllPage/RequestsByOwner";
 import ManagePost from "../pages/AllPage/ManagePost";
+import AllEvents from "../pages/AllPage/AllEvents";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
             <ManagePost></ManagePost>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/all-events",
+        element: <AllEvents></AllEvents>,
       },
     ],
   },
