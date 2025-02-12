@@ -10,7 +10,7 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/events/${id}`);
+        const response = await fetch(`https://volunteer-server-nu.vercel.app/events/${id}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch event details");

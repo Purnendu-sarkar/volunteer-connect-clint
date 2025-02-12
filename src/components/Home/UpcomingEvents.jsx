@@ -10,9 +10,7 @@ const UpcomingEvents = () => {
     // Fetch events from backend
     const fetchEvents = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/events"
-        );
+        const response = await fetch("https://volunteer-server-nu.vercel.app/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
@@ -72,12 +70,13 @@ const UpcomingEvents = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Date: {new Date(event.date).toLocaleDateString()}
               </p>
-              <button
-                className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
+              <Link
+                to={`/events/${event.id}`}
+                className="mt-4 block text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
                 dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
         ))}

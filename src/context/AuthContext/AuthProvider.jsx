@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
         try {
           // Request JWT from the backend
           const { data } = await axios.post(
-            `http://localhost:5000/jwt`,
+            `https://volunteer-server-nu.vercel.app/jwt`,
             { email: currentUser?.email },
             { withCredentials: true }
           );
@@ -89,7 +89,7 @@ const AuthProvider = ({ children }) => {
         try {
           // Logout user and clear cookies from backend
           const { data } = await axios.get(
-            `http://localhost:5000/logout`,
+            `https://volunteer-server-nu.vercel.app/logout`,
             { withCredentials: true }
           );
           // console.log("User logged out:", data);

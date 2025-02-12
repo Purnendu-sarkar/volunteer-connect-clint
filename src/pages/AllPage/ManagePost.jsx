@@ -15,7 +15,7 @@ const ManagePost = () => {
     const fetchMyPosts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/my-posts?email=${user.email}&token=${localStorage.getItem("jwt")}`,
+          `https://volunteer-server-nu.vercel.app/my-posts?email=${user.email}&token=${localStorage.getItem("jwt")}`,
           { credentials: "include"}
         );
         const data = await response.json();
@@ -44,7 +44,7 @@ const ManagePost = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `http://localhost:5000/volunteerPost/${id}`,
+            `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`,
             {
               method: "DELETE",
             }
