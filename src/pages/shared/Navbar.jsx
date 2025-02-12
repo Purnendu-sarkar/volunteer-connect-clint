@@ -12,6 +12,7 @@ import {
   Settings,
   Sun,
   Moon,
+  CalendarDays,
 } from "lucide-react";
 
 const Navbar = () => {
@@ -95,6 +96,13 @@ const Navbar = () => {
         >
           <Users className="h-5 w-5" /> All Volunteer
         </Link>
+        <Link
+          to="/all-events"
+          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+        >
+          <CalendarDays className="h-5 w-5" /> All Events
+        </Link>
+
         {user ? (
           <>
             <Link
@@ -188,6 +196,16 @@ const Navbar = () => {
                 <Users className="h-6 w-6" /> All Volunteer
               </Link>
             </li>
+            <li>
+              <Link
+                to="/all-events"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2 text-2xl"
+              >
+                <CalendarDays className="h-6 w-6" /> All Events
+              </Link>
+            </li>
+
             {user ? (
               <>
                 <li>
