@@ -11,7 +11,6 @@ import {
   Legend,
 } from "chart.js";
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,18 +22,19 @@ ChartJS.register(
 
 const VolunteersChart = () => {
   const [chartData, setChartData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://volunteer-server-nu.vercel.app/volunteerPosts");
+        const response = await axios.get(
+          "https://volunteer-server-nu.vercel.app/volunteerPosts"
+        );
         const posts = response.data;
 
-       
         const titles = posts.map((post) => post.title);
         const volunteersNeeded = posts.map((post) => post.volunteersNeeded);
 
-        
         setChartData({
           labels: titles,
           datasets: [
@@ -49,19 +49,33 @@ const VolunteersChart = () => {
         });
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  if (!chartData) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-opacity-75"></div>
+        <span className="ml-3 text-lg font-semibold dark:text-white">
+          Fetching Opportunities...
+        </span>
+      </div>
+    );
   }
 
   return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
-      <h2 className="font-extrabold text-3xl text-center">Volunteers Needed per Post</h2>
+    <div
+      className="container mx-auto py-8 px-4"
+      style={{ width: "80%", margin: "0 auto" }}
+    >
+      <h2 className="font-extrabold text-3xl text-center">
+        Volunteers Needed per Post
+      </h2>
       <Bar
         data={chartData}
         options={{
