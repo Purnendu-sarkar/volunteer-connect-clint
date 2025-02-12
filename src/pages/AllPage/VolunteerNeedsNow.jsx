@@ -9,7 +9,7 @@ const VolunteerNeedsNow = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          "https://volunteer-server-nu.vercel.app/volunteerNeedsNow"
+          "http://localhost:5000/volunteerNeedsNow"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");

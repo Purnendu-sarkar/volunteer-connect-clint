@@ -28,7 +28,7 @@ const VolunteersChart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://volunteer-server-nu.vercel.app/volunteerPosts"
+          "http://localhost:5000/volunteerPosts"
         );
         const posts = response.data;
 

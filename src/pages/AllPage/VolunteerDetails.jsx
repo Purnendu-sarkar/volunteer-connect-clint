@@ -12,7 +12,7 @@ const VolunteerDetails = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`
+          `http://localhost:5000/volunteerPost/${id}`
         );
         setPost(response.data);
       } catch (error) {
@@ -28,7 +28,7 @@ const VolunteerDetails = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto h-screen px-4 py-8">
       <Helmet>
         <title>Volunteer Details | Volunteer</title>
       </Helmet>

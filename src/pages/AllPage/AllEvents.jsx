@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -10,9 +11,7 @@ const AllEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(
-          "https://volunteer-server-nu.vercel.app/events"
-        );
+        const response = await fetch("http://localhost:5000/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
@@ -27,11 +26,11 @@ const AllEvents = () => {
     fetchEvents();
   }, []);
 
-  // Sorting logic
+  // Sorting and Filtering
   const sortedEvents = [...events]
     .filter((event) =>
       event.title.toLowerCase().includes(searchQuery.toLowerCase())
-    ) // Filter events by search query
+    )
     .sort((a, b) => {
       if (sortOption === "date-newest")
         return new Date(b.date) - new Date(a.date);
@@ -67,7 +66,6 @@ const AllEvents = () => {
 
       {/* Search & Sorting */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-        {/* Search Input */}
         <input
           type="text"
           placeholder="Search events..."
@@ -76,7 +74,6 @@ const AllEvents = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        {/* Sorting Dropdown */}
         <select
           className="p-2 border rounded-md dark:bg-gray-800 dark:text-white"
           value={sortOption}
@@ -110,18 +107,20 @@ const AllEvents = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Date: {new Date(event.date).toLocaleDateString()}
               </p>
-              <button
-                className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
+
+              {/* Learn More Button */}
+              <Link
+                to={`/events/${event.id}`}
+                className="mt-4 block text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
                 dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
         ))}
       </div>
 
-      {/* No events found message */}
       {sortedEvents.length === 0 && (
         <p className="text-center text-gray-500 dark:text-gray-400 mt-6">
           No events found.

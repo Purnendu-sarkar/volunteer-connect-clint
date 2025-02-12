@@ -28,7 +28,7 @@ const UpdatePost = () => {
     const fetchPostData = async () => {
       try {
         const response = await axios.get(
-          `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`
+          `http://localhost:5000/volunteerPost/${id}`
         );
         const data = response.data;
         setFormData({
@@ -89,7 +89,7 @@ const UpdatePost = () => {
 
     try {
       const response = await axios.put(
-        `https://volunteer-server-nu.vercel.app/volunteerPost/${id}`,
+        `http://localhost:5000/volunteerPost/${id}`,
         updatedData
       );
       // console.log(response);

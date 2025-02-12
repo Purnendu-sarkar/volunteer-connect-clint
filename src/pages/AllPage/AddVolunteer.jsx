@@ -79,7 +79,7 @@ const AddVolunteer = () => {
 
     try {
       const response = await axios.post(
-        "https://volunteer-server-nu.vercel.app/addPost",
+        "http://localhost:5000/addPost",
         postData
       );
       if (response.data.insertedId) {

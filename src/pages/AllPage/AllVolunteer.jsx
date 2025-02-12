@@ -20,7 +20,7 @@ const AllVolunteer = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "https://volunteer-server-nu.vercel.app/volunteerPosts",
+          "http://localhost:5000/volunteerPosts",
           {
             params: { title: search },
           }
