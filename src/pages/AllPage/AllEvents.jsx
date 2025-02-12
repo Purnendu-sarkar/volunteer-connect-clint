@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const AllEvents = () => {
@@ -11,7 +12,9 @@ const AllEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://volunteer-server-nu.vercel.app/events");
+        const response = await fetch(
+          "https://volunteer-server-nu.vercel.app/events"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }
@@ -60,6 +63,9 @@ const AllEvents = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
+      <Helmet>
+        <title>All Events | Volunteer</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
         All Events
       </h2>

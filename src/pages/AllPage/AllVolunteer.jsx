@@ -55,7 +55,7 @@ const AllVolunteer = () => {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen p-4">
       <Helmet>
-        <title>All Volunteers | Professional Design</title>
+        <title>All Volunteers | Volunteer</title>
       </Helmet>
       {/* Main Section */}
       <main className="container mx-auto px-4 py-8">
