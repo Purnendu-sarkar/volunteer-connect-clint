@@ -4,6 +4,7 @@ import Slider from "./Home/Slider";
 import UpcomingEvents from "./Home/UpcomingEvents";
 import VolunteersChart from "./Home/VolunteersChart";
 import { Helmet } from "react-helmet-async";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       </div>
       <VolunteersChart></VolunteersChart>
       <UpcomingEvents></UpcomingEvents>
+      <Newsletter></Newsletter>
     </div>
   );
 };
