@@ -4,6 +4,8 @@ const AllEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOption, setSortOption] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -24,6 +26,19 @@ const AllEvents = () => {
     };
     fetchEvents();
   }, []);
+
+  // Sorting logic
+  const sortedEvents = [...events]
+    .filter((event) =>
+      event.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ) // Filter events by search query
+    .sort((a, b) => {
+      if (sortOption === "date-newest")
+        return new Date(b.date) - new Date(a.date);
+      if (sortOption === "date-oldest")
+        return new Date(a.date) - new Date(b.date);
+      return 0;
+    });
 
   if (loading) {
     return (
@@ -49,8 +64,33 @@ const AllEvents = () => {
       <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
         All Events
       </h2>
+
+      {/* Search & Sorting */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search events..."
+          className="p-2 border rounded-md w-full md:w-1/3 dark:bg-gray-800 dark:text-white"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+
+        {/* Sorting Dropdown */}
+        <select
+          className="p-2 border rounded-md dark:bg-gray-800 dark:text-white"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="">Sort By</option>
+          <option value="date-newest">Date: Newest First</option>
+          <option value="date-oldest">Date: Oldest First</option>
+        </select>
+      </div>
+
+      {/* Events Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map((event) => (
+        {sortedEvents.map((event) => (
           <div
             key={event.id}
             className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 
@@ -80,6 +120,13 @@ const AllEvents = () => {
           </div>
         ))}
       </div>
+
+      {/* No events found message */}
+      {sortedEvents.length === 0 && (
+        <p className="text-center text-gray-500 dark:text-gray-400 mt-6">
+          No events found.
+        </p>
+      )}
     </div>
   );
 };

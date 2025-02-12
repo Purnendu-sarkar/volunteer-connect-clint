@@ -1,11 +1,18 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    alert(`Subscribed with: ${email}`);
+
+    Swal.fire({
+      title: `Subscribed with: ${email}`,
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     setEmail("");
   };
 
