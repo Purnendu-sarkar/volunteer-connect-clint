@@ -49,18 +49,14 @@ const Navbar = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-xl font-semibold">
-        Loading...
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-rose-500"></div>
       </div>
     );
   }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full ${
-        isDarkTheme ? "bg-gray-800 text-white" : "bg-white text-black"
-      } border-b border-gray-300 dark:border-gray-700 z-50 py-3 px-4 lg:px-8 flex items-center justify-between`}
-    >
+    <nav className="fixed top-0 left-0 w-full  dark:bg-gray-800  dark:text-white border-b border-gray-300 dark:border-gray-700 z-50 py-3 px-4 lg:px-8 flex items-center justify-between">
       {/* Logo */}
       <Link
         to="/"
@@ -83,7 +79,7 @@ const Navbar = () => {
       </button>
 
       {/* Desktop Menu */}
-      <div className="hidden lg:flex gap-6 items-center">
+      <div className="hidden lg:flex gap-8 items-center">
         <Link
           to="/"
           className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
@@ -126,19 +122,18 @@ const Navbar = () => {
               >
                 <img
                   src={user.photoURL || "default-avatar.png"}
-                  alt="User"
+                  alt={user.displayName || "User"}
                   className="w-10 h-10 rounded-full cursor-pointer hover:ring-2 hover:ring-rose-500 transition duration-300"
                 />
               </button>
               {isProfileMenuOpen && (
-                <ul
-                  className={`absolute right-0 mt-2 w-48 ${
-                    isDarkTheme
-                      ? "bg-gray-800 text-white"
-                      : "bg-white text-black"
-                  } shadow-md p-2 rounded-md`}
-                >
+                <ul className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md p-2 rounded-md">
                   <li className="px-4 py-2">{user.displayName || "No Name"}</li>
+                  <li className="px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300">
+                    <Link to="/profile" className="flex items-center gap-2">
+                      <Settings className="h-5 w-5" /> Profile
+                    </Link>
+                  </li>
                   <li
                     className="px-4 py-2 text-red-600 cursor-pointer flex items-center gap-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
                     onClick={handleLogout}
@@ -166,25 +161,21 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div
-          className={`fixed inset-0 ${
-            isDarkTheme ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
-          } flex flex-col items-center justify-center`}
-        >
+        <div className="fixed inset-0 bg-gray-200 dark:bg-gray-900 text-black dark:text-white flex flex-col items-center justify-center">
           <button
             className="absolute top-4 right-4"
             onClick={() => setIsMenuOpen(false)}
           >
             <X className="h-8 w-8" />
           </button>
-          <ul className="space-y-4 text-center">
+          <ul className="space-y-6 text-center">
             <li>
               <Link
                 to="/"
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-2 text-2xl"
               >
-                <Home className="h-6 w-6" /> Home
+                <Home className="h-8 w-8" /> Home
               </Link>
             </li>
             <li>
@@ -193,7 +184,7 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-2 text-2xl"
               >
-                <Users className="h-6 w-6" /> All Volunteer
+                <Users className="h-8 w-8" /> All Volunteer
               </Link>
             </li>
             <li>
@@ -202,7 +193,7 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-2 text-2xl"
               >
-                <CalendarDays className="h-6 w-6" /> All Events
+                <CalendarDays className="h-8 w-8" /> All Events
               </Link>
             </li>
 
@@ -214,7 +205,7 @@ const Navbar = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className="flex items-center gap-2 text-2xl"
                   >
-                    <PlusCircle className="h-6 w-6" /> Add Volunteer
+                    <PlusCircle className="h-8 w-8" /> Add Volunteer
                   </Link>
                 </li>
                 <li>
@@ -223,7 +214,7 @@ const Navbar = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className="flex items-center gap-2 text-2xl"
                   >
-                    <Settings className="h-6 w-6" /> Manage Posts
+                    <Settings className="h-8 w-8" /> Manage Posts
                   </Link>
                 </li>
                 <li>
@@ -231,7 +222,7 @@ const Navbar = () => {
                     onClick={handleLogout}
                     className="flex items-center gap-2 text-2xl text-red-600"
                   >
-                    <LogOut className="h-6 w-6" /> Logout
+                    <LogOut className="h-8 w-8" /> Logout
                   </button>
                 </li>
               </>
@@ -242,7 +233,7 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-2 text-2xl"
                 >
-                  <LogOut className="h-6 w-6" /> Login
+                  <LogOut className="h-8 w-8" /> Login
                 </Link>
               </li>
             )}
