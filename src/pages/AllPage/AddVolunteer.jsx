@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
+import { ClipLoader } from "react-spinners";
 
 const AddVolunteer = () => {
   const { user } = useContext(AuthContext);
@@ -18,26 +19,25 @@ const AddVolunteer = () => {
     volunteersNeeded: "",
     deadline: new Date(),
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Handle input change
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Validate "thumbnail" URL field
+    // Validate thumbnail URL
     if (name === "thumbnail") {
       const urlPattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
       if (!urlPattern.test(value)) {
         toast.error(
           "Please enter a valid image URL (png, jpg, jpeg, gif, webp, svg).",
-          {
-            position: "top-center",
-          }
+          { position: "top-center" }
         );
         return;
       }
     }
 
-    // Validate "volunteersNeeded" field
+    // Validate volunteers needed
     if (name === "volunteersNeeded") {
       if (value < 1) {
         toast.error("Number of Volunteers Needed must be at least 1.", {
@@ -47,11 +47,10 @@ const AddVolunteer = () => {
       }
     }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
+
+  // Handle date picker changes
   const handleDateChange = (date) => {
     const today = new Date();
     if (date < today) {
@@ -60,16 +59,14 @@ const AddVolunteer = () => {
       });
       return;
     }
-    setFormData({
-      ...formData,
-      deadline: date,
-    });
+    setFormData({ ...formData, deadline: date });
   };
-  
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const postData = {
       ...formData,
       volunteersNeeded: parseInt(formData.volunteersNeeded, 10),
@@ -83,9 +80,8 @@ const AddVolunteer = () => {
         postData
       );
       if (response.data.insertedId) {
-        toast.success("Post added successfully!", {
-          position: "top-center",
-        });
+        toast.success("Post added successfully!", { position: "top-center" });
+        // Reset form after success
         setFormData({
           thumbnail: "",
           title: "",
@@ -97,10 +93,10 @@ const AddVolunteer = () => {
         });
       }
     } catch (error) {
-      toast.error("Failed to add post. Try again!", {
-        position: "top-center",
-      });
+      toast.error("Failed to add post. Try again!", { position: "top-center" });
       console.error("Error adding post:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -114,7 +110,7 @@ const AddVolunteer = () => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 shadow-lg rounded-lg space-y-6 max-w-3xl mx-auto"
+        className="bg-white p-6 shadow-lg rounded-lg space-y-6 max-w-xl mx-auto"
       >
         {/* Thumbnail */}
         <div>
@@ -127,7 +123,7 @@ const AddVolunteer = () => {
             value={formData.thumbnail}
             onChange={handleChange}
             placeholder="Enter thumbnail URL"
-            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           />
         </div>
@@ -143,7 +139,7 @@ const AddVolunteer = () => {
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter post title"
-            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           />
         </div>
@@ -158,7 +154,7 @@ const AddVolunteer = () => {
             value={formData.description}
             onChange={handleChange}
             placeholder="Enter post description"
-            className="textarea textarea-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="textarea textarea-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           />
         </div>
@@ -172,7 +168,7 @@ const AddVolunteer = () => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="select select-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="select select-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           >
             <option value="">Select a category</option>
@@ -194,7 +190,7 @@ const AddVolunteer = () => {
             value={formData.location}
             onChange={handleChange}
             placeholder="Enter location"
-            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           />
         </div>
@@ -210,7 +206,7 @@ const AddVolunteer = () => {
             value={formData.volunteersNeeded}
             onChange={handleChange}
             placeholder="Enter number of volunteers"
-            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
             required
           />
         </div>
@@ -223,43 +219,51 @@ const AddVolunteer = () => {
           <DatePicker
             selected={formData.deadline}
             onChange={handleDateChange}
-            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary"
+            className="input input-bordered w-full border-gray-300 focus:ring-primary focus:border-primary rounded-md"
+            wrapperClassName="w-full"
+            popperPlacement="bottom"
+            aria-label="Select deadline date"
           />
         </div>
 
-        {/* Organizer Name */}
-        <div>
-          <label className="block mb-1 font-semibold text-gray-700">
-            Organizer Name
-          </label>
-          <input
-            type="text"
-            value={user?.displayName || "N/A"}
-            readOnly
-            className="input input-bordered w-full bg-gray-100 border-gray-300"
-          />
-        </div>
-
-        {/* Organizer Email */}
-        <div>
-          <label className="block mb-1 font-semibold text-gray-700">
-            Organizer Email
-          </label>
-          <input
-            type="email"
-            value={user?.email || "N/A"}
-            readOnly
-            className="input input-bordered w-full bg-gray-100 border-gray-300"
-          />
+        {/* Organizer Details */}
+        <div className="space-y-2">
+          <h3 className="font-semibold text-gray-700">Organizer Details</h3>
+          <div>
+            <label className="block mb-1 font-semibold text-gray-700">
+              Organizer Name
+            </label>
+            <input
+              type="text"
+              value={user?.displayName || "N/A"}
+              readOnly
+              className="input input-bordered w-full bg-gray-100 border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold text-gray-700">
+              Organizer Email
+            </label>
+            <input
+              type="email"
+              value={user?.email || "N/A"}
+              readOnly
+              className="input input-bordered w-full bg-gray-100 border-gray-300 rounded-md"
+            />
+          </div>
         </div>
 
         {/* Submit Button */}
         <div>
           <button
             type="submit"
-            className="btn btn-primary w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition"
+            className="btn btn-primary w-full bg-primary text-white py-2 rounded-lg hover:bg-secondary transition flex items-center justify-center"
+            disabled={isSubmitting}
           >
-            Add Post
+            {isSubmitting ? (
+              <ClipLoader color="#fff" size={20} className="mr-2" />
+            ) : null}
+            {isSubmitting ? "Adding..." : "Add Post"}
           </button>
         </div>
       </form>
