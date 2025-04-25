@@ -69,11 +69,11 @@ const RequestsByOwner = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6 my-10 bg-gray-50 shadow-md rounded-lg">
+    <div className="max-w-7xl mx-auto p-6 my-10 h-screen shadow-md rounded-lg">
       <Helmet>
         <title>Volunteer Requests | Volunteer</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
+      <h1 className="text-3xl font-bold text-center text-accent mb-6">
         Requests on My Posts
       </h1>
 
@@ -83,8 +83,8 @@ const RequestsByOwner = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white shadow rounded-lg">
-            <thead className="bg-blue-600 text-white">
+          <table className="min-w-full  shadow rounded-lg">
+            <thead className="bg-primary text-white">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold">
                   Volunteer Name
@@ -103,13 +103,13 @@ const RequestsByOwner = () => {
             <tbody>
               {requests.map((request) => (
                 <tr key={request._id} className="hover:bg-gray-100 transition">
-                  <td className="px-6 py-4 text-sm text-gray-800">
+                  <td className="px-6 py-4 text-sm ">
                     {request.volunteerName}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-800">
+                  <td className="px-6 py-4 text-sm ">
                     {request.volunteerEmail}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-800">
+                  <td className="px-6 py-4 text-sm ">
                     {request.title}
                   </td>
                   <td className="px-6 py-4 text-center">

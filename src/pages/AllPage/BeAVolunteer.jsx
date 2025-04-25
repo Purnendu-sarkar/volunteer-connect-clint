@@ -102,7 +102,7 @@ const BeAVolunteer = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto p-6  dark:bg-black shadow-lg rounded-lg">
       <Helmet>
         <title>Be A Volunteer | Volunteer</title>
       </Helmet>
@@ -112,9 +112,9 @@ const BeAVolunteer = () => {
       <form className="space-y-6">
         {/* Read-Only Fields */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          {/* <label className="block text-sm font-medium text-gray-700">
             Thumbnail:
-          </label>
+          </label> */}
           <img
             src={post.thumbnail}
             alt="Thumbnail"
@@ -123,7 +123,7 @@ const BeAVolunteer = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Title:
             </label>
             <input
@@ -134,7 +134,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium dark:text-gray-300">
               Description:
             </label>
             <textarea
@@ -144,7 +144,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Category:
             </label>
             <input
@@ -155,7 +155,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Location:
             </label>
             <input
@@ -166,7 +166,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               No. of Volunteers Needed:
             </label>
             <input
@@ -177,7 +177,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Deadline:
             </label>
             <input
@@ -188,7 +188,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Organizer Name:
             </label>
             <input
@@ -199,7 +199,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Organizer Email:
             </label>
             <input
@@ -213,7 +213,7 @@ const BeAVolunteer = () => {
 
         {/* Editable Field for Suggestion */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium  dark:text-gray-300">
             Suggestion:
           </label>
           <textarea
@@ -227,7 +227,7 @@ const BeAVolunteer = () => {
         {/* Read-Only User Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Volunteer Name:
             </label>
             <input
@@ -238,7 +238,7 @@ const BeAVolunteer = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium  dark:text-gray-300">
               Volunteer Email:
             </label>
             <input

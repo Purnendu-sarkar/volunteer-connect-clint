@@ -7,7 +7,7 @@ const ManageMyPost = () => {
 
   return (
     <div className="max-w-7xl mx-auto min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-8">
+      <h1 className="text-3xl font-semibold text-center  mb-8">
         Manage My Posts
       </h1>
 
@@ -17,8 +17,8 @@ const ManageMyPost = () => {
           className={`px-4 py-2 rounded-lg text-white font-medium transition 
             ${
               activeComponent === "ManagePost"
-                ? "bg-blue-700 border-b-4 border-blue-900"
-                : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-primary border-b-4 border-blue-900"
+                : "bg-secondary hover:bg-blue-700"
             }`}
         >
           Manage Post
@@ -29,8 +29,8 @@ const ManageMyPost = () => {
           className={`px-4 py-2 rounded-lg text-white font-medium transition 
             ${
               activeComponent === "RequestsByOwner"
-                ? "bg-blue-700 border-b-4 border-blue-900"
-                : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-primary border-b-4 border-blue-900"
+                : "bg-secondary hover:bg-blue-700"
             }`}
         >
           Requests By Volunteer

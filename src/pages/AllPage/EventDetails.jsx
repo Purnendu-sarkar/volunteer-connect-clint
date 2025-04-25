@@ -53,11 +53,11 @@ const EventDetails = () => {
 
       {/* Event Details */}
       <div className="w-full md:w-1/2 space-y-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-blue-700">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary">
           {event?.title}
         </h1>
-        <p className="text-lg text-gray-700">{event?.description}</p>
-        <p className="text-gray-600">
+        <p className="text-lg dark:text-gray-300">{event?.description}</p>
+        <p className="dark:text-gray-300">
           <strong>Date:</strong> {new Date(event?.date).toLocaleDateString()}
         </p>
       </div>
