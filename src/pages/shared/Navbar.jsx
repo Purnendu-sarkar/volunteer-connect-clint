@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import {
   X,
@@ -56,13 +56,13 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 w-full  dark:bg-gray-800  dark:text-white border-b border-gray-300 dark:border-gray-700 z-50 py-3 px-4 lg:px-8 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full border-b  z-50 py-3 px-4 lg:px-8 flex items-center justify-between">
       {/* Logo */}
       <Link
         to="/"
-        className="flex items-center font-bold text-2xl hover:scale-105 transition-transform duration-300"
+        className="flex items-center font-bold text-2xl text-primary hover:scale-105 transition-transform duration-300"
       >
-        <Heart className="h-8 w-8 text-rose-500" />
+        <Heart className="h-8 w-8" />
         <span className="ml-2">Volunteer Network</span>
       </Link>
 
@@ -80,39 +80,59 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className="hidden lg:flex gap-8 items-center">
-        <Link
+        <NavLink
           to="/"
-          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+          className={({ isActive }) =>
+            `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+              isActive ? "text-rose-500" : ""
+            }`
+          }
         >
           <Home className="h-5 w-5" /> Home
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/all-volunteer"
-          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+          className={({ isActive }) =>
+            `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+              isActive ? "text-rose-500" : ""
+            }`
+          }
         >
           <Users className="h-5 w-5" /> All Volunteer
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/all-events"
-          className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+          className={({ isActive }) =>
+            `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+              isActive ? "text-rose-500" : ""
+            }`
+          }
         >
           <CalendarDays className="h-5 w-5" /> All Events
-        </Link>
+        </NavLink>
 
         {user ? (
           <>
-            <Link
+            <NavLink
               to="/volunteer-needs"
-              className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+              className={({ isActive }) =>
+                `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+                  isActive ? "text-rose-500" : ""
+                }`
+              }
             >
               <PlusCircle className="h-5 w-5" /> Add Volunteer
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/manage-posts"
-              className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+              className={({ isActive }) =>
+                `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+                  isActive ? "text-rose-500" : ""
+                }`
+              }
             >
               <Settings className="h-5 w-5" /> Manage Posts
-            </Link>
+            </NavLink>
 
             {/* Profile Dropdown */}
             <div className="relative profile-menu">
@@ -145,12 +165,16 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          <Link
+          <NavLink
             to="/login"
-            className="flex items-center gap-2 hover:text-rose-500 transition-all duration-300"
+            className={({ isActive }) =>
+              `flex items-center gap-2 hover:text-rose-500 transition-all duration-300 ${
+                isActive ? "text-rose-500" : ""
+              }`
+            }
           >
             <LogOut className="h-5 w-5" /> Login
-          </Link>
+          </NavLink>
         )}
       </div>
 
@@ -170,52 +194,72 @@ const Navbar = () => {
           </button>
           <ul className="space-y-6 text-center">
             <li>
-              <Link
+              <NavLink
                 to="/"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-2 text-2xl"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                    isActive ? "text-rose-500" : ""
+                  }`
+                }
               >
                 <Home className="h-8 w-8" /> Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/all-volunteer"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-2 text-2xl"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                    isActive ? "text-rose-500" : ""
+                  }`
+                }
               >
                 <Users className="h-8 w-8" /> All Volunteer
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/all-events"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-2 text-2xl"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                    isActive ? "text-rose-500" : ""
+                  }`
+                }
               >
                 <CalendarDays className="h-8 w-8" /> All Events
-              </Link>
+              </NavLink>
             </li>
 
             {user ? (
               <>
                 <li>
-                  <Link
+                  <NavLink
                     to="/volunteer-needs"
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-2 text-2xl"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                        isActive ? "text-rose-500" : ""
+                      }`
+                    }
                   >
                     <PlusCircle className="h-8 w-8" /> Add Volunteer
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/manage-posts"
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-2 text-2xl"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                        isActive ? "text-rose-500" : ""
+                      }`
+                    }
                   >
                     <Settings className="h-8 w-8" /> Manage Posts
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
                   <button
@@ -228,13 +272,17 @@ const Navbar = () => {
               </>
             ) : (
               <li>
-                <Link
+                <NavLink
                   to="/login"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-2 text-2xl"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 text-2xl hover:text-rose-500 transition-all duration-300 ${
+                      isActive ? "text-rose-500" : ""
+                    }`
+                  }
                 >
                   <LogOut className="h-8 w-8" /> Login
-                </Link>
+                </NavLink>
               </li>
             )}
           </ul>
