@@ -16,6 +16,7 @@ import RequestsByOwner from "../pages/AllPage/RequestsByOwner";
 import ManagePost from "../pages/AllPage/ManagePost";
 import AllEvents from "../pages/AllPage/AllEvents";
 import EventDetails from "../pages/AllPage/EventDetails";
+import Profile from "../pages/AllPage/Profile";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,14 @@ const router = createBrowserRouter([
       {
         path: "/events/:id",
         element: <EventDetails></EventDetails>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
