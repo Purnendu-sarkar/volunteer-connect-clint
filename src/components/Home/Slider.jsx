@@ -45,7 +45,7 @@ const Slider = () => {
               <h1 className="text-4xl font-bold">{slide.title}</h1>
               <p className="mt-2">{slide.text}</p>
               <Link to="/volunteer-needs">
-                <button className="btn btn-primary mt-4">Join Now</button>
+                <button className="btn bg-primary  mt-4">Join Now</button>
               </Link>
             </motion.div>
           </div>
