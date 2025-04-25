@@ -53,8 +53,7 @@ const VolunteerNeedsNow = () => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 
-            bg-white dark:bg-gray-800 dark:border-gray-700"
+            className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105"
           >
             {/* Thumbnail with Lazy Loading */}
             <img
@@ -65,12 +64,12 @@ const VolunteerNeedsNow = () => {
             />
 
             {/* Post Info */}
-            <div className="p-4 dark:text-gray-200">
+            <div className="p-4 ">
               <h3 className="text-lg font-semibold">{post.title}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm ">
                 Category: {post.category}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm ">
                 Deadline: {new Date(post.deadline).toLocaleDateString()}
               </p>
 
@@ -79,7 +78,7 @@ const VolunteerNeedsNow = () => {
                 onClick={() =>
                   (window.location.href = `/volunteer/${post._id}`)
                 }
-                className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
+                className="mt-4 w-full px-4 py-2 bg-accent text-white rounded hover:bg-blue-600 transition 
                 dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 View Details

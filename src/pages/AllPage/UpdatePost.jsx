@@ -117,11 +117,11 @@ const UpdatePost = () => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 shadow-lg rounded-lg space-y-6 max-w-3xl mx-auto"
+        className=" p-6 shadow-lg rounded-lg space-y-6 max-w-3xl mx-auto"
       >
         {/* Thumbnail */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Thumbnail
           </label>
           <input
@@ -137,7 +137,7 @@ const UpdatePost = () => {
 
         {/* Post Title */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Post Title
           </label>
           <input
@@ -153,7 +153,7 @@ const UpdatePost = () => {
 
         {/* Description */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Description
           </label>
           <textarea
@@ -168,7 +168,7 @@ const UpdatePost = () => {
 
         {/* Category */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Category
           </label>
           <select
@@ -188,7 +188,7 @@ const UpdatePost = () => {
 
         {/* Location */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Location
           </label>
           <input
@@ -204,7 +204,7 @@ const UpdatePost = () => {
 
         {/* Volunteers Needed */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             No. of Volunteers Needed
           </label>
           <input
@@ -220,7 +220,7 @@ const UpdatePost = () => {
 
         {/* Deadline */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Deadline
           </label>
           <DatePicker
@@ -232,27 +232,27 @@ const UpdatePost = () => {
 
         {/* Organizer Name */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Organizer Name
           </label>
           <input
             type="text"
             value={user?.displayName || "N/A"}
             readOnly
-            className="input input-bordered w-full bg-gray-100 border-gray-300"
+            className="input input-bordered w-full  border-gray-300"
           />
         </div>
 
         {/* Organizer Email */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Organizer Email
           </label>
           <input
             type="email"
             value={user?.email || "N/A"}
             readOnly
-            className="input input-bordered w-full bg-gray-100 border-gray-300"
+            className="input input-bordered w-full  border-gray-300"
           />
         </div>
 

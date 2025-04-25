@@ -110,11 +110,11 @@ const AddVolunteer = () => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 shadow-lg rounded-lg space-y-6 max-w-xl mx-auto"
+        className=" p-6 shadow-lg rounded-lg space-y-6 max-w-xl mx-auto"
       >
         {/* Thumbnail */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Thumbnail
           </label>
           <input
@@ -130,7 +130,7 @@ const AddVolunteer = () => {
 
         {/* Post Title */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Post Title
           </label>
           <input
@@ -146,7 +146,7 @@ const AddVolunteer = () => {
 
         {/* Description */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Description
           </label>
           <textarea
@@ -161,7 +161,7 @@ const AddVolunteer = () => {
 
         {/* Category */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Category
           </label>
           <select
@@ -181,7 +181,7 @@ const AddVolunteer = () => {
 
         {/* Location */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Location
           </label>
           <input
@@ -197,7 +197,7 @@ const AddVolunteer = () => {
 
         {/* Volunteers Needed */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             No. of Volunteers Needed
           </label>
           <input
@@ -213,7 +213,7 @@ const AddVolunteer = () => {
 
         {/* Deadline */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700">
+          <label className="block mb-1 font-semibold ">
             Deadline
           </label>
           <DatePicker
@@ -228,27 +228,27 @@ const AddVolunteer = () => {
 
         {/* Organizer Details */}
         <div className="space-y-2">
-          <h3 className="font-semibold text-gray-700">Organizer Details</h3>
+          <h3 className="font-semibold ">Organizer Details</h3>
           <div>
-            <label className="block mb-1 font-semibold text-gray-700">
+            <label className="block mb-1 font-semibold ">
               Organizer Name
             </label>
             <input
               type="text"
               value={user?.displayName || "N/A"}
               readOnly
-              className="input input-bordered w-full bg-gray-100 border-gray-300 rounded-md"
+              className="input input-bordered w-full  border-gray-300 rounded-md"
             />
           </div>
           <div>
-            <label className="block mb-1 font-semibold text-gray-700">
+            <label className="block mb-1 font-semibold">
               Organizer Email
             </label>
             <input
               type="email"
               value={user?.email || "N/A"}
               readOnly
-              className="input input-bordered w-full bg-gray-100 border-gray-300 rounded-md"
+              className="input input-bordered w-full  border-gray-300 rounded-md"
             />
           </div>
         </div>

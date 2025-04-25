@@ -48,13 +48,13 @@ const AllVolunteer = () => {
   }
 
   return (
-    <div className=" dark:bg-gray-900 min-h-screen p-4">
+    <div className="  min-h-screen p-4">
       <Helmet>
         <title>All Volunteers | Volunteer</title>
       </Helmet>
       {/* Main Section */}
       <main className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
+        <h2 className="text-3xl font-bold text-center mb-6 ">
           Explore Volunteer Opportunities
         </h2>
 
@@ -65,7 +65,7 @@ const AllVolunteer = () => {
             placeholder="Search by Title"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input input-bordered w-full md:w-2/3 border-gray-300 dark:bg-gray-800 dark:text-white"
+            className="input input-bordered w-full md:w-2/3 "
           />
           <button
             onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
@@ -85,19 +85,19 @@ const AllVolunteer = () => {
         {isGrid ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <div key={post._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+              <div key={post._id} className="card  shadow-lg rounded-lg overflow-hidden">
                 <img
                   src={post.thumbnail || "https://via.placeholder.com/300"}
                   alt={post.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 opacity-80 object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-800">{post.title}</h3>
-                  <p className="text-gray-600">Location: {post.location}</p>
-                  <p className="text-gray-600">Volunteers Needed: {post.volunteersNeeded}</p>
+                  <h3 className="text-lg font-bold ">{post.title}</h3>
+                  <p className="">Location: {post.location}</p>
+                  <p className="">Volunteers Needed: {post.volunteersNeeded}</p>
                   <Link
                     to={`/volunteer/${post._id}`}
-                    className="block mt-4 bg-blue-600 text-white text-center py-2 rounded-md hover:bg-blue-700 transition"
+                    className="block mt-4 bg-accent text-white text-center py-2 rounded-md hover:bg-blue-700 transition"
                   >
                     View Details
                   </Link>

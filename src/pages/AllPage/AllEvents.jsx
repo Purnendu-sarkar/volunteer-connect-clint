@@ -64,7 +64,7 @@ const AllEvents = () => {
       <Helmet>
         <title>All Events | Volunteer</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
+      <h2 className="text-3xl font-bold text-center mb-6 ">
         All Events
       </h2>
 
@@ -73,13 +73,13 @@ const AllEvents = () => {
         <input
           type="text"
           placeholder="Search events..."
-          className="p-2 border rounded-md w-full md:w-1/3 dark:bg-gray-800 dark:text-white"
+          className="p-2 border rounded-md w-full md:w-1/3 "
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
         <select
-          className="p-2 border rounded-md dark:bg-gray-800 dark:text-white"
+          className="p-2 border rounded-md "
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
         >
@@ -94,7 +94,7 @@ const AllEvents = () => {
         {sortedEvents.map((event) => (
           <div
             key={event.id}
-            className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 bg-white dark:bg-gray-800 dark:border-gray-700"
+            className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 "
           >
             <img
               src={event.thumbnail || "https://via.placeholder.com/300"}
@@ -102,19 +102,19 @@ const AllEvents = () => {
               className="w-full h-40 object-cover"
               loading="lazy"
             />
-            <div className="p-4 dark:text-gray-200">
+            <div className="p-4 ">
               <h3 className="text-lg font-semibold">{event.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="">
                 {event.description}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm ">
                 Date: {new Date(event.date).toLocaleDateString()}
               </p>
 
               {/* Learn More Button */}
               <Link
                 to={`/events/${event.id}`}
-                className="mt-4 block text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="mt-4 block text-center px-4 py-2 bg-accent text-white rounded hover:bg-blue-600 transition dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 Learn More
               </Link>
@@ -124,7 +124,7 @@ const AllEvents = () => {
       </div>
 
       {sortedEvents.length === 0 && (
-        <p className="text-center text-gray-500 dark:text-gray-400 mt-6">
+        <p className="text-center  mt-6">
           No events found.
         </p>
       )}

@@ -28,7 +28,7 @@ const UpcomingEvents = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-opacity-75"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4  border-opacity-75"></div>
         <span className="ml-3 text-lg font-semibold dark:text-white">
           Fetching Opportunities...
         </span>
@@ -46,7 +46,7 @@ const UpcomingEvents = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
+      <h2 className="text-3xl font-bold text-center mb-6 ">
         Upcoming Events
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -54,7 +54,7 @@ const UpcomingEvents = () => {
           <div
             key={event.id}
             className="border rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 
-            bg-white dark:bg-gray-800 dark:border-gray-700"
+            "
           >
             <img
               src={event.thumbnail || "https://via.placeholder.com/300"}
@@ -62,18 +62,18 @@ const UpcomingEvents = () => {
               className="w-full h-40 object-cover"
               loading="lazy"
             />
-            <div className="p-4 dark:text-gray-200">
+            <div className="p-4 ">
               <h3 className="text-lg font-semibold">{event.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="">
                 {event.description}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm ">
                 Date: {new Date(event.date).toLocaleDateString()}
               </p>
               <Link
                 to={`/events/${event.id}`}
-                className="mt-4 block text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition 
-                dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="mt-4 block text-center px-4 py-2 bg-accent text-white rounded hover:bg-blue-600 transition 
+                "
               >
                 Learn More
               </Link>
@@ -83,7 +83,7 @@ const UpcomingEvents = () => {
       </div>
       <div className="text-center mt-6">
         <Link to="/all-events">
-          <button className="btn btn-primary px-9">See All</button>
+          <button className="btn bg-accent text-white px-9">See All</button>
         </Link>
       </div>
     </div>

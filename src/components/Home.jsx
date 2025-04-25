@@ -16,7 +16,7 @@ const Home = () => {
       <VolunteerNeedsNow></VolunteerNeedsNow>
       <div className="text-center mb-5">
         <NavLink to={"/all-volunteer"}>
-          <button className="btn btn-primary px-9">See all</button>
+          <button className="btn bg-secondary text-white px-9">See all</button>
         </NavLink>
       </div>
       <VolunteersChart></VolunteersChart>
