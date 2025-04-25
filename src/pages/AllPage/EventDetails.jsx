@@ -41,9 +41,9 @@ const EventDetails = () => {
     return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col md:flex-col items-center gap-6">
+    <div className="container mx-auto px-4 py-8 grid grid-rows-1 md:grid-cols-2 items-center gap-6 mt-10">
       {/* Event Image */}
-      <div className="w-full">
+      <div className="">
         <img
           src={event?.thumbnail}
           alt={event?.title}
