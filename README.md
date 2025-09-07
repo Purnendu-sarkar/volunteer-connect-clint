@@ -1,6 +1,6 @@
 # Volunteer Network
 
-![Volunteer Screenshot](https://ibb.co.com/YBmbQpr6)
+![Volunteer Screenshot](https://res.cloudinary.com/djx2qopcz/image/upload/v1757255839/Volunteer_Network_e860gj.png)
 
 A responsive, feature-rich platform to manage and engage with volunteer opportunities. This project demonstrates expertise in creating user-friendly interfaces, secure backends, and robust CRUD functionalities for real-world applications.
 
@@ -94,3 +94,42 @@ Volunteer Connect allows users to create, manage, and participate in volunteer o
 - [Framer Motion](https://www.npmjs.com/package/framer-motion)  
 - [Axios](https://www.npmjs.com/package/axios)  
 
+
+## 📦 Setup Instructions
+
+### 🔧 Installation
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/your-username/volunteer-connect.git
+   cd volunteer-connect
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+3. **Set Up Environment Variables:
+Create a `.env` file in the project root and add the following variables:**
+
+   ```bash
+   VITE_API_URL=your_backend_api_url
+   VITE_FIREBASE_API_KEY=your_firebase_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+
+    ```
+
+4. **Run the Application:**
+
+   ```bash
+   npm run dev
+   ````
+
+5. **Build for Production:**
+
+   ```bash
+   npm run build
+   ```
